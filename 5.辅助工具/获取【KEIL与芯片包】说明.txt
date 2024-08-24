@@ -1,0 +1,11 @@
+请从下面云盘地址保存获取KEIL和芯片包
+
+网盘：https://pan.baidu.com/s/1vNC3rkKzz5ePMl6Pdm-mvg  
+提取码：xusw
+
+文件夹路径：
+软件工具>KEIL和芯片包：
+Keil_526.rar
+下载需要的 F1、F4、F7、H7 名字的DFP pack芯片包
+
+注册说明
