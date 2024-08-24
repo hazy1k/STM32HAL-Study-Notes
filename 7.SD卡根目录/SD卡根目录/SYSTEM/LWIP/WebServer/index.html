@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0031)http://192.168.1.100/index.html -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<title>ALIENTEK 探索者STM32F407开发板LWIP实例</title>
+<style type="text/css">
+
+.ul1{margin:0;padding:0; list-style:none;}
+.li1{margin:0;padding:0; list-style:none;}
+.menu{width:1000px;height:48px;margin:0 auto; background:url(image/tab.jpg) repeat-x; }
+.menu ul{width:1000px;float:left;height:48px;display:inline;}
+.menu ul li{width:200px;height:48px; line-height:48px; text-align:center; float:left;display:inline; }
+.menu ul li a{width:200px;height:48px; float:left;text-decoration:none; color:#fff; font-size:18px;font-weight:bold;}
+.menu ul li a:hover{ background:#FF0000 repeat-x; }		
+
+.logo{}
+.bodystyle{ width:1000px; margin:0 auto;  background:#d5d5d7;}
+ 
+</style>
+  
+</head>
+<body class="bodystyle">
+<div style="background-color:#FFFFFF;  ">
+<div class="logo">
+ <img src="/image/head.jpg" alt="广州市星翼电子科技有限公司" title="广州市星翼电子科技有限公司" style="margin:20px 0px 0px 0px;">
+ 
+</div>
+ 
+
+<div class="menu">
+	<ul class="ul1">
+    	<li class="li1"><a href="/index.html">主页</a></li>
+        <li class="li1"><a href="/STM32_LED_OFF_BEEP_OFF.shtml">LED/BEEP控制</a></li>
+        <li class="li1"><a href="/STM32_ADC_TEMPERATE.shtml">ADC/内部温度传感器</a></li>
+        <li class="li1"><a href="/STM32_RTC.shtml">RTC实时时钟</a></li>
+        <li class="li1"><a href="http://eboard.taobao.com/" target="_blank">联系我们</a></li>
+    </ul>
+</div>
+
+ 
+<div style="width:1000px;margin-left:5px;">
+  <div style="width:580px;float:left;height:400px;margin-top:10px; ">
+    <p>ALIENTEK 探索者STM32F407开发板是广州星翼电子科技于2014年11月份推出的新<br>
+      一代STM32F407旗舰开发板。<br>
+      </p>
+    <p>探索者STM32F407开发板载资源和特点包括： </p>
+    <ul>
+    <li>STM32F407ZGT6主控MCU，1MB FLASH，192K SRAM,168M主频</li>
+    <li>外扩1M字节SRAM，16M字节SPI FLASH</li>
+    <li>支持音视频播放，软解WAV/MP3/FLAC/APE/AVI等音视频格式</li>
+    <li>支持lwIP/ucOS/ucGUI/emWIN/FatFS</li>
+    <li>支持双RS232串口/RS485/CAN/USB Slave/USB Host</li>
+    <li>支持NES游戏（全速,带音频），性能超越infoNES</li>
+    <li>支持自动识别2.8/3.5/4.3寸电阻/电容式触摸屏</li>
+    <li>支持手写识别/拼音输入法/打电话/收发短信</li>
+    <li>支持六轴传感器(MPU6050)，DMP姿态解算</li>
+    <li>支持百万高清摄像头，JPEG/BMP拍照&nbsp;    </li></ul>
+  <br>
+  关于探索者STM32F407开发板的详细介绍请移步<br>
+  官方淘宝店铺: <a href="http://eboard.taobao.com/" target="_blank">http://eboard.taobao.com</a><br>  
+  技术支持论坛: <a href="http://www.openedv.com/" target="_blank">www.openedv.com 开源电子网</a><br>
+  星翼电子官网: <a href="http://www.alientek.com/" target="_blank">www.alientek.com</a><br>
+  </div>
+  <div style=" height:400px;margin-top:10px; valign:center;">
+    <p><img style="valign:center;" src="/image/stm32.jpg">
+    </p>
+    <p>&nbsp;</p>
+  </div>
+  </div>
+ 
+ <div style="background-color:#0066CC;color:#fff;  ">
+                <h3>
+                  <span>ALIENTEK STM32F407 LWIP例程介绍</span>
+                </h3>
+</div>
+
+
+<div style="margin-left:5px;">
+<br>
+此Web Server例程是基于LWIP TCP/IP协议栈的一个简单应用。我们星翼电子提供有以下基于LWIP TCP/IP协议栈例程<br><br>
+<span style="font-size:20px;font-weight:bold;">1.无操作系统的应用例程</span><br>
+<ul>
+  <li>Web Server例程</li>
+  <li>TCP客户端例程</li>
+  <li>TCP服务器例程</li>
+  <li>UDP例程</li>
+</ul>
+<span style="font-size:20px;font-weight:bold;"><br>2.使用操作系统的应用例程(UCOS)</span><br>
+<ul>
+  <li>基于 netconn API的Web Server例程</li>
+  <li>基于 netconn API的TCP客户端和服务器例程</li>
+  <li>基于 netconn API的UDP例程</li>
+ 
+</ul>
+</div>
+ 
+
+
+<div style="background-color:#0066CC;color:#fff;  ">
+                <h3>
+                  关于LWIP
+                </h3>
+</div>
+<div style="margin-left:5px;width:1000px; ">
+<br>Lwip是Light Weight(轻型)IP协议,有无操作系统的支持都可以运行。Lwip实现的重点是在保持TCP协议主要功能的基础上减少对RAM的占用，它只需要十几KB的RAM和40K左右的ROM就可以运行,这使Lwip协议栈适合在低端的嵌入式系统中使用。Lwip由Adam Dunkels编写的一个开源的TCP/IP协议栈。<br><br>
+<span style="font-size:20px;font-weight:bold;">lwIP 特性</span><br>
+<ul>
+  <li>IP(Internet Protocol) 协议</li>
+  <li>ICMP(Internet Control Message Protocol) 协议</li>
+  <li>UDP(User Datagram Protocol) 协议</li>
+  <li>TCP(Transmission Control Protocol) 协议</li>
+  <li>raw API</li>
+  <li>socket API</li>
+  <li>DHCP</li>
+  <li>PPP</li>
+  <li>ARP</li>
+</ul>
+</div>
+ 
+ 
+</div>
+
+ <div align="center" style="margin-top:20px;margin-bottom:30px;">
+   
+         &#169; 开源电子网(<a href="http://www.openedv.com/" target="_blank">OpenEdv.com</a>) | <a href="http://www.alientek.com/" target="_blank">关于我们</a> | <a target="_blank" href="http://www.alientek.com/">官方网站</a> | <a href="http://weibo.com/u/2973019374" target="_blank">@新浪微博</a> |<a href="http://shop62057469.taobao.com/" target="_blank">官方淘宝店</a> |<a href="http://www.miitbeian.gov.cn/" target="_blank" style="color:#737573;text-decoration:none;">粤ICP备12000418号-1</a>                <br>          
+ </div>
+ 
+
+</body></html>
