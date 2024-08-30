@@ -33,5 +33,3 @@ delay 文件夹内包含了 delay.c 和 delay.h 两个文件，这两个文件�
 这里，我们以 UCOSII 为例，介绍如何实现操作系统和我们的 delay 函数共用 SysTick 定时器。首先，我们简单介绍下 UCOSII 的时钟： ucos 运行需要一个系统时钟节拍（类似 “心跳”），而这个节拍是固定的（由 OS_TICKS_PER_SEC 宏定义设置），比如要求 5ms 一次（即可设置： OS_TICKS_PER_SEC=200），在 STM32 上面，一般是由 SysTick 来提供这个节拍，也就是 SysTick要设置为 5ms 中断一次，为 ucos 提供时钟节拍，而且这个时钟一般是不能被打断的（否则就不准了）。
 
 因为在 ucos 下 systick 不能再被随意更改，如果我们还想利用 systick 来做 delay_us 或者delay_ms 的延时，就必须想点办法了，这里我们利用的是时钟摘取法。以 delay_us 为例，比如delay_us（50），在刚进入 delay_us 的时候先计算好这段延时需要等待的 systick 计数次数，这里为 50*21（假设系统时钟为 168Mhz，因为 systick 的频率为系统时钟频率的 1/8，那么 systick每增加 1，就是 1/21us），然后我们就一直统计 systick 的计数变化，直到这个值变化了 50*21，一旦检测到变化达到或者超过这个值，就说明延时 50us 时间到了。这样，我们只是抓取 SysTick计数器的变化，并不需要修改 SysTick 的任何状态，完全不影响 SysTick 作为 UCOS 时钟节拍的功能，这就是实现 delay 和操作系统共用 SysTick 定时器的原理。
-
-
