@@ -1,5 +1,5 @@
 {
-  "name": "IWDG",
+  "name": "WWDG",
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [],
@@ -93,7 +93,7 @@
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
           },
           {
-            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c"
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_wwdg.c"
           }
         ],
         "folders": []
@@ -123,7 +123,7 @@
             "path": "../HARDWARE/KEY/key.c"
           },
           {
-            "path": "../HARDWARE/IWDG/iwdg.c"
+            "path": "../HARDWARE/WWDG/wwdg.c"
           }
         ],
         "folders": []
@@ -139,10 +139,10 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "958c87baca2f9f91553150191796e067"
+    "uid": "36869d9fa6e8172ab63a7f8772796abf"
   },
   "targets": {
-    "IWDG": {
+    "WWDG": {
       "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
@@ -283,8 +283,9 @@
           "../HALLIB/STM32F4xx_HAL_Driver/Inc",
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
-          "../HARDWARE/IWDG",
-          "RTE/_IWDG"
+          "../HARDWARE/WWDG",
+          ".cmsis/include",
+          "RTE/_WWDG"
         ],
         "libList": [],
         "defineList": [

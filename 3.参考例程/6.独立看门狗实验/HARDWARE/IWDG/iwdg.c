@@ -14,7 +14,7 @@ void IWDG_Init(u8 prer,u16 rlr)
     HAL_IWDG_Init(&IWDG_Handler);	   // 初始化IWDG,默认会开启独立看门狗	
 }
     
-//喂独立看门狗
+// 喂独立看门狗
 void IWDG_Feed(void)
 {   
     HAL_IWDG_Refresh(&IWDG_Handler); // 喂狗
