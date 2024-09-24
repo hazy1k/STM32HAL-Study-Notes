@@ -4,17 +4,8 @@
 #include "led.h"
 #include "lcd.h"
 #include "usmart.h"
-/************************************************
- ALIENTEK 探索者STM32F407开发板 实验14
- USMART调试实验-HAL库函数版
- 技术支持：www.openedv.com
- 淘宝店铺：http://eboard.taobao.com 
- 关注微信公众平台微信号："正点原子"，免费获取STM32资料。
- 广州市星翼电子科技有限公司  
- 作者：正点原子 @ALIENTEK
-************************************************/
 
-//LED状态设置函数
+// LED状态设置函数
 void led_set(u8 sta)
 {
 	LED1=sta;
@@ -41,8 +32,7 @@ int main(void)
 	LCD_ShowString(30,110,200,16,16,"2017/4/11");	   
   	while(1) 
 	{		 	  
-		LED0=!LED0;					 
+		LED0 = !LED0;					 
 		delay_ms(500);
 	}
 }
-

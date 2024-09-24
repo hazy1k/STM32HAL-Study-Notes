@@ -1,5 +1,5 @@
 {
-  "name": "TFTLCD",
+  "name": "USMART",
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [],
@@ -126,6 +126,21 @@
         "folders": []
       },
       {
+        "name": "USMART",
+        "files": [
+          {
+            "path": "../USMART/usmart.c"
+          },
+          {
+            "path": "../USMART/usmart_str.c"
+          },
+          {
+            "path": "../USMART/usmart_config.c"
+          }
+        ],
+        "folders": []
+      },
+      {
         "name": "README",
         "files": [],
         "folders": []
@@ -136,10 +151,10 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "97d3e2316c88bcb2548f01124c843e65"
+    "uid": "5d3a31e950dac08a58edd5bd7dbdaafd"
   },
   "targets": {
-    "TFTLCD": {
+    "USMART": {
       "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
@@ -274,6 +289,7 @@
           "../CORE",
           "../OBJ",
           ".",
+          "../USMART",
           "../SYSTEM/delay",
           "../SYSTEM/sys",
           "../SYSTEM/usart",
@@ -281,7 +297,8 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/LCD",
-          "RTE/_TFTLCD"
+          ".cmsis/include",
+          "RTE/_USMART"
         ],
         "libList": [],
         "defineList": [
