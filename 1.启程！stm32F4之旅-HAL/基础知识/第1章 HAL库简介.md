@@ -13,7 +13,7 @@ P0 = Ox11;
 而在 STM32 的开发中，我们同样可以操作寄存器：
 
 ```c
-GPIOF->BSRR=0x00000001; //这里是针对 STM32F4 系列
+GPIOF->BSRR = 0x00000001; // 这里是针对 STM32F4 系列
 ```
 
 这种方法当然可以，但是这种方法的劣势是你需要去掌握每个寄存器的用法，你才能正确使用STM32，而对于 STM32 这种级别的 MCU，数百个寄存器记起来又是谈何容易。于是 ST(意法半导体)推出了官方固件库，固件库将这些寄存器底层操作都封装起来，提供一整套接口（API）供开发者调用，大多数场合下，你不需要去知道操作的是哪个寄存器，你只需要知道调用哪些函数即可。 而 HAL 库是在标准固件库之后推出的。
@@ -21,7 +21,7 @@ GPIOF->BSRR=0x00000001; //这里是针对 STM32F4 系列
 比如上面的控制 BSRRL 寄存器实现电平控制，官方 HAL 库封装了一个函数：
 
 ```c
-void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState
+void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
 {
     if(PinState != GPIO_PIN_RESET)
     {
@@ -37,3 +37,7 @@ void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState Pin
 这个时候你不需要再直接去操作 BSRR 寄存器了，你只需要知道怎么使用 HAL_GPIO_WritePin这个函数就可以了。在你对外设的工作原理有一定的了解之后，你再去看 HAL 库函数，基本上函数名字能告诉你这个函数的功能是什么，该怎么使用，这样是不是开发会方便很多？
 
 任何处理器，不管它有多么的高级，归根结底都是要对处理器的寄存器进行操作。但是 HAL库不是万能的，您如果想要把 STM32 学透，光读 STM32HAL 库是远远不够的。你还是要了解一下 STM32 的原理， 了解 STM32 各个外设的运行机制。只有了解了这些原理，你在进行 HAL库开发过程中才可能得心应手游刃有余。 只有了解了原理，你才能做到“知其然知其所以然”，所以大家在学习库函数的同时，别忘了要了解一下寄存器大致配置过程。
+
+---
+
+2024.9.23 第一次修订，后期不再维护
