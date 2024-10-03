@@ -107,7 +107,6 @@ TIM14_CH1Handler.OCPolarity = TIM_OCPOLARITY_LOW; // 输出比较极性为低
 
 ```c
 HAL_TIM_PWM_ConfigChannel(&TIM14_Handler, &TIM14_CH1Handler, TIM_CHANNEL_1); // 配置TIM14通道1
-
 ```
 
 - 调用 HAL 库的 `HAL_TIM_PWM_ConfigChannel` 函数，配置 TIM14 的通道 1。
@@ -208,7 +207,6 @@ while(1)
         dir=1;          // led0pwmval递减到0后，方向改为递增
     TIM_SetTIM14Compare1(led0pwmval); // 修改比较值，修改占空比
 }
-
 ```
 
 - **`while(1)`**：进入无限循环，不断执行内部的代码。
@@ -319,5 +317,3 @@ void SystemClock_Config(void)
 ---
 
 2024.10.3 第一次修订，后期不再维护
-
-
