@@ -2,13 +2,15 @@
 
 ## 1. PWM简介
 
-脉冲宽度调制(PWM)，是英文“Pulse Width Modulation” 的缩写，简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。简单一点，就是对脉冲宽度的控制
+脉冲宽度调制(PWM)，是英文“Pulse Width Modulation” 的缩写，简称脉宽调制，是利用微处理器的数字输出来对模拟电路进行控制的一种非常有效的技术。简单一点，就是对脉冲宽度的控制。
 
-STM32F4 的定时器除了 TIM6 和 7。其他的定时器都可以用来产生 PWM 输出。其中高级定时器 TIM1 和 TIM8 可以同时产生多达 7 路的 PWM 输出。而通用定时器也能同时产生多达 4路的 PWM 输出！这里我们仅使用 TIM14 的 CH1 产生一路 PWM 输出。
+STM32F4 的定时器除了 TIM6 和 7。其他的定时器都可以用来产生 PWM 输出。其中高级定时器 TIM1 和 TIM8 可以同时产生多达 7 路的 PWM 输出。而通用定时器也能同时产生多达 4 路的 PWM 输出！这里我们仅使用 TIM14 的 CH1 产生一路 PWM 输出。
 
 要使 STM32F4 的通用定时器 TIMx 产生 PWM 输出，除了上一章介绍的寄存器外，我们还会用到 3 个寄存器，来控制 PWM 的。这三个寄存器分别是：捕获/比较模式寄存器（TIMx_CCMR1/2）、捕获/比较使能寄存器（TIMx_CCER）、捕获/比较寄存器（TIMx_CCR1~4）。接下来我们简单介绍一下这三个寄存器。
 
 ## 2. 相关寄存器介绍
+
+### 2.1 捕获/比较模式寄存器（TIMx_CCMR1/2）
 
 首先是捕获/比较模式寄存器（TIMx_CCMR1/2），该寄存器一般有 2 个： TIMx _CCMR1和 TIMx _CCMR2，不过 TIM14 只有一个。 TIMx_CCMR1 控制 CH1 和 2，而 TIMx_CCMR2控制 CH3 和 4。以下我们将以 TIM14 为例进行介绍。TIM14_CCMR1 寄存器各位描述如图：
 
@@ -16,7 +18,87 @@ STM32F4 的定时器除了 TIM6 和 7。其他的定时器都可以用来产生 
 
 该寄存器的有些位在不同模式下，功能不一样，所以在图中，我们把寄存器分了 2层，上面一层对应输出而下面的则对应输入。
 
-这里我们需要说明的是模式设置位 OC1M，此部分由 3位组成。总共可以配置成 7 种模式，我们使用的是 PWM 模式，所以这 3 位必须设置为 110/111。这两种 PWM 模式的区别就是输出电平的极性相反。 另外 CC1S 用于设置通道的方向（输入/输出）默认设置为 0，就是设置通道作为输出使用。 注意：这里是因为我们的 TIM14 只有 1 个通道，所以才只有第八位有效，高八位无效，其他有多个通道的定时器，高八位也是有效的
+这里我们需要说明的是模式设置位 OC1M，此部分由 3位组成。总共可以配置成 7 种模式，我们使用的是 PWM 模式，所以这 3 位必须设置为 110/111。这两种 PWM 模式的区别就是输出电平的极性相反。 另外 CC1S 用于设置通道的方向（输入/输出）默认设置为 0，就是设置通道作为输出使用。 注意：这里是因为我们的 TIM14 只有 1 个通道，所以才只有第八位有效，高八位无效，其他有多个通道的定时器，高八位也是有效的。
+
+---
+
+- **输出比较**：生成特定的PWM（脉宽调制）信号或在特定时间触发事件。
+- **输入捕获**：记录输入信号的状态变化（如上升沿和下降沿），以测量信号的频率或周期。
+
+#### CCMR1 和 CCMR2 的作用
+
+- **CCMR1** 通常用于配置定时器的前两个通道（例如通道1和通道2）。
+- **CCMR2** 用于配置下两个通道（如通道3和通道4）。
+
+这两个寄存器允许你设置每个通道的操作模式。
+
+#### 输出比较模式
+
+输出比较模式主要用于生成PWM信号或其他定时器事件。CCMR寄存器中的相关字段如下：
+
+- **OC1M (Output Compare Mode)**：
+  
+  - 选择输出比较的模式。
+  - 常见的模式包括：
+    - 000：禁用（普通模式）
+    - 001：输出比较模式1
+    - 010：输出比较模式2
+    - 011：PWM模式1
+    - 100：PWM模式2
+
+- **OC1PE (Output Compare Preload Enable)**：
+  
+  - 使能预装载寄存器。这意味着在下一次更新事件时，将新的输出比较值加载到比较寄存器中。
+
+#### 输入捕获模式
+
+输入捕获模式允许定时器捕获输入信号的变化。相关字段如下：
+
+- **CC1S (Capture/Compare Selection)**：
+  
+  - 选择该通道是用于输入捕获还是输出比较。
+  - 00：输出比较
+  - 01：输入捕获
+
+- **IC1F (Input Capture Filter)**：
+  
+  - 设置过滤器参数，帮助消除噪声对输入信号的影响。
+
+下面是一个更详细的代码示例，展示如何配置定时器以使用输出比较和输入捕获功能。
+
+```c
+#include "stm32f4xx.h"  // 请根据你的MCU型号包含相应的头文件
+
+void TIM2_Config(void) {
+    // 1. 使能定时器时钟
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+
+    // 2. 配置基本参数
+    TIM2->PSC = 7999;  // 设置预分频器为7999，定时器时钟频率 = 1 MHz
+    TIM2->ARR = 1000;  // 设置自动重载值，定时器溢出时间 = 1秒
+
+    // 3. 配置通道1为PWM输出模式
+    TIM2->CCMR1 &= ~TIM_CCMR1_CC1S;          // 清除CC1S位，选择输出比较
+    TIM2->CCMR1 |= (6 << TIM_CCMR1_OC1M_Pos); // 设置为PWM模式1
+    TIM2->CCMR1 |= TIM_CCMR1_OC1PE;          // 使能预装载
+
+    // 设置通道1的比较值
+    TIM2->CCR1 = 500;  // 设置占空比为50%
+
+    // 4. 配置通道2为输入捕获模式
+    TIM2->CCMR1 &= ~(3 << TIM_CCMR1_CC2S_Pos); // 清除CC2S位，选择输入捕获
+    TIM2->CCMR1 |= (1 << TIM_CCMR1_IC2F_Pos);  // 设置输入捕获滤波器
+
+    // 5. 启动定时器
+    TIM2->CR1 |= TIM_CR1_CEN;  // 启动定时器
+
+    // 6. 使能通道1和通道2的输出/输入
+    TIM2->CCER |= TIM_CCER_CC1E; // 使通道1输出使能
+    TIM2->CCER |= TIM_CCER_CC2E; // 使通道2输入使能
+}
+```
+
+### 2.2 捕获/比较使能寄存器（TIM14_CCER）
 
 接下来，我们介绍 TIM14 的捕获/比较使能寄存器（TIM14_CCER），该寄存器控制着各个输入输出通道的开关。
 
@@ -24,11 +106,56 @@ STM32F4 的定时器除了 TIM6 和 7。其他的定时器都可以用来产生 
 
 该寄存器比较简单， 我们这里只用到了 CC1E 位，该位是输入/捕获 1 输出使能位，要想PWM 从 IO 口输出，这个位必须设置为 1，所以我们需要设置该位为 1
 
+### 2.3 捕获/比较寄存器（TIMx_CCR1~4）
+
 最后，我们介绍一下捕获/比较寄存器（TIMx_CCR1~4），该寄存器总共有 4 个，对应 4 个通道 CH1~4。 不过 TIM14 只有一个，即： TIM14_CCR1
 
 ![屏幕截图 2024 09 16 131515](https://img.picgo.net/2024/09/16/-2024-09-16-13151583845dc8071c1c74.png)
 
 在输出模式下，该寄存器的值与 CNT 的值比较，根据比较结果产生相应动作。利用这点，我们通过修改这个寄存器的值，就可以控制 PWM 的输出脉宽了。
+
+- **TIMx_CCR1**: 通道 1 的捕获/比较寄存器
+- **TIMx_CCR2**: 通道 2 的捕获/比较寄存器
+- **TIMx_CCR3**: 通道 3 的捕获/比较寄存器
+- **TIMx_CCR4**: 通道 4 的捕获/比较寄存器
+
+- **输出比较模式**：
+  
+  - 设置比较值，当定时器计数器达到该值时，触发相应的事件（如翻转输出状态、产生中断等）。
+
+- **输入捕获模式**：
+  
+  - 存储在输入信号上检测到的时间戳（即计数器的值），可用于后续的时间测量。
+
+以下是配置 TIM2 的 CCR 寄存器以实现 PWM 输出和输入捕获的代码示例：
+
+```c
+#include "stm32f4xx.h"  // 根据你的 MCU 型号包含相应的头文件
+
+void TIM2_Config(void) {
+    // 1. 使能定时器时钟
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+    // 2. 配置基本参数
+    TIM2->PSC = 7999;  // 预分频器设置
+    TIM2->ARR = 1000;  // 自动重载值设置
+    // 3. 配置通道1为PWM输出
+    TIM2->CCMR1 &= ~TIM_CCMR1_CC1S;          // 清除 CC1S 位，选择输出比较
+    TIM2->CCMR1 |= (6 << TIM_CCMR1_OC1M_Pos); // 设置为 PWM 模式 1
+    TIM2->CCMR1 |= TIM_CCMR1_OC1PE;          // 使能预加载
+    // 设置比较值
+    TIM2->CCR1 = 500;  // 设置占空比为 50%
+    // 4. 配置通道2为输入捕获模式
+    TIM2->CCMR1 &= ~(3 << TIM_CCMR1_CC2S_Pos); // 清除 CC2S 位，选择输入捕获
+    TIM2->CCMR1 |= (1 << TIM_CCMR1_IC2F_Pos);  // 设置输入捕获滤波器
+    // 5. 启动定时器
+    TIM2->CR1 |= TIM_CR1_CEN;  // 启动定时器
+    // 6. 使能通道1和通道2
+    TIM2->CCER |= TIM_CCER_CC1E; // 使能通道1输出
+    TIM2->CCER |= TIM_CCER_CC2E; // 使能通道2输入
+}
+```
+
+### 2.4 刹车和死区寄存器（TIMx_BDTR）
 
 如果是通用定时器，则配置以上三个寄存器就够了，但是如果是高级定时器，则还需要配置：刹车和死区寄存器（TIMx_BDTR）
 
@@ -36,7 +163,50 @@ STM32F4 的定时器除了 TIM6 和 7。其他的定时器都可以用来产生 
 
 该寄存器，我们只需要关注最高位： MOE 位，要想高级定时器的 PWM 正常输出，则必须设置 MOE 位为 1，否则不会有输出。
 
-本章，我们使用的是 TIM14 的通道 1，所以我们需要修改 TIM14_CCR1 以实现脉宽控制DS0 的亮度。至此，我们把本章要用的几个相关寄存器都介绍完了， 本章要实现通过 TIM14_CH1输出 PWM 来控制 DS0 的亮度。 下面我们介绍通过库函数来配置该功能的步骤。
+---
+
+#### 1. **用途**
+
+- **刹车功能**：用于在特定条件下立即停止 PWM 输出，以保护设备。
+- **死区时间**：在输出信号之间插入一个小的延迟，以避免短路或其他电气问题。
+
+#### 2. **寄存器描述**
+
+- **TIMx_BDTR**: 包含多个位，用于配置刹车和死区时间的特性。
+
+#### 3. **主要字段**
+
+- **MOE (Main Output Enable)**: 启用主输出。如果设置为 1，PWM 输出将被激活。
+- **AOE (Auto-Output Enable)**: 自动输出使能。当设置为 1 时，定时器会自动生成 PWM 输出。
+- **BKINE (Break Input Enable)**: 使能刹车输入信号。
+- **BKDFN (Break Filter)**: 配置刹车输入滤波器的数量。
+- **OSS (Off-State Selection)**: 当启用刹车时，输出状态选择。可以选择将输出设置为高阻态或低状态。
+- **DBL (Dead-Time Length)**: 配置死区时间的长度。
+
+#### 4. **基本使用示例**
+
+以下是配置 TIM2 的 BDTR 寄存器的代码示例：
+
+```c
+#include "stm32f4xx.h"  // 根据你的 MCU 型号包含相应的头文件
+
+void TIM2_BDTR_Config(void) {
+    // 1. 使能定时器时钟
+    RCC->APB1ENR |= RCC_APB1ENR_TIM2EN;
+    // 2. 配置定时器基础参数
+    TIM2->PSC = 7999;  // 预分频
+    TIM2->ARR = 1000;  // 自动重载值
+    // 3. 配置比较模式 (假设已经完成)
+    // ...
+    // 4. 配置 BDTR 寄存器
+    TIM2->BDTR = 0;                  // 清零
+    TIM2->BDTR |= TIM_BDTR_MOE;     // 使能主输出
+    TIM2->BDTR |= (5 << TIM_BDTR_DBL_Pos); // 设置死区时间长度
+    TIM2->BDTR |= TIM_BDTR_BKINE;   // 使能刹车输入
+    // 5. 启动定时器
+    TIM2->CR1 |= TIM_CR1_CEN;       // 启动定时器
+}
+```
 
 ## 3. 基本操作步骤
 
@@ -53,8 +223,8 @@ __HAL_RCC_GPIOF_CLK_ENABLE(); // 开启 GPIOF 时钟
 
 ```c
 GPIO_InitTypeDef GPIO_Initure;
-__HAL_RCC_TIM14_CLK_ENABLE(); //使能定时器 14
-__HAL_RCC_GPIOF_CLK_ENABLE(); // 开启 GPIOF 时钟
+__HAL_RCC_TIM14_CLK_ENABLE();  //使能定时器 14
+__HAL_RCC_GPIOF_CLK_ENABLE();  // 开启 GPIOF 时钟
 GPIO_Initure.Pin = GPIO_PIN_9; // PF9
 GPIO_Initure.Mode = GPIO_MODE_AF_PP; // 复用推挽输出
 GPIO_Initure.Pull  =GPIO_PULLUP; //上拉
@@ -77,7 +247,7 @@ HAL_StatusTypeDef HAL_TIM_PWM_Init(TIM_HandleTypeDef *htim);
 
 该函数实现的功能以及使用方法和 HAL_TIM_Base_Init 都是类似的，作用都是初始化定时器 的 ARR 和 PSC 等参 数 。 为什么 HAL 库要提供这个函数而不直接让我们使用HAL_TIM_Base_Init 函数呢？
 
-这是因为 HAL 库为定时器的 PWM 输出定义了单独的 MSP 回调函数HAL_TIM_PWM_MspInit，也就是说，当我们调用HAL_TIM_PWM_Init进行PWM初始化之后，该函数内部会调用 MSP 回调函数 HAL_TIM_PWM_MspInit。而当我们使用 HAL_TIM_Base_Init初始化定时器参数的时候，它内部调用的回调函数为 HAL_TIM_Base_MspInit，这里大家注意区分。
+这是因为 HAL 库为定时器的 PWM 输出定义了单独的 MSP 回调函数HAL_TIM_PWM_MspInit，也就是说，当我们调用HAL_TIM_PWM_Init进行 PWM 初始化之后，该函数内部会调用 MSP 回调函数 HAL_TIM_PWM_MspInit。而当我们使用 HAL_TIM_Base_Init 初始化定时器参数的时候，它内部调用的回调函数为 HAL_TIM_Base_MspInit，这里大家注意区分。
 
 所以大家一定要注意，使用 HAL_TIM_PWM_Init 初始化定时器时，回调函数为： HAL_TIM_PWM_MspInit，该函数声明为：
 
@@ -92,8 +262,7 @@ void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim);
 在 HAL 库中， PWM 通道设置是通过函数 HAL_TIM_PWM_ConfigChannel 来设置的：
 
 ```c
-HAL_StatusTypeDef HAL_TIM_PWM_ConfigChannel(TIM_HandleTypeDef *htim,
-TIM_OC_InitTypeDef* sConfig, uint32_t Channel);
+HAL_StatusTypeDef HAL_TIM_PWM_ConfigChannel(TIM_HandleTypeDef *htim, TIM_OC_InitTypeDef* sConfig, uint32_t Channel);
 ```
 
 第一个参数 htim 是定时器初始化句柄，也就是 TIM_HandleTypeDef 结构体指针类型，这和 HAL_TIM_PWM_Init 函数调用时候参数保存一致即可。
@@ -103,8 +272,8 @@ TIM_OC_InitTypeDef* sConfig, uint32_t Channel);
 ```c
 typedef struct
 {
-    uint32_t OCMode; // PWM 模式
-    uint32_t Pulse; // 捕获比较值
+    uint32_t OCMode;     // PWM 模式
+    uint32_t Pulse;      // 捕获比较值
     uint32_t OCPolarity; // 极性
     uint32_t OCNPolarity;
     uint32_t OCFastMode; //快速模式
@@ -167,3 +336,7 @@ void TIM_SetCompare1(TIM_TypeDef *TIMx, u32 compare)
 ```
 
 这种方法因为要调用 HAL_TIM_PWM_ConfigChannel 函数对各种初始化参数进行重新设置，所以大家在使用中一定要注意，例如在实时系统中如果多个线程同时修改初始化结构体相关参数，可能导致结果混乱。
+
+---
+
+2024.10.3 第一次修订，后期不再维护
