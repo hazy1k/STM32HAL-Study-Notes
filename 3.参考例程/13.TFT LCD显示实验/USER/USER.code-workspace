@@ -22,7 +22,10 @@
                 "command": "extension.execute",
                 "priority": 4
             }
-        ]
+        ],
+        "files.associations": {
+            "lcd.h": "c"
+        }
     },
     "extensions": {}
 }

@@ -297,7 +297,6 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/LCD",
-          ".cmsis/include",
           "RTE/_USMART"
         ],
         "libList": [],

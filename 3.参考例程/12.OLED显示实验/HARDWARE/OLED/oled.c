@@ -14,10 +14,11 @@ void OLED_Refresh_Gram(void)
 		OLED_WR_Byte (0xb0+i,OLED_CMD);    //设置页地址（0~7）
 		OLED_WR_Byte (0x00,OLED_CMD);      //设置显示位置—列低地址
 		OLED_WR_Byte (0x10,OLED_CMD);      //设置显示位置—列高地址   
-		for(n=0;n<128;n++)OLED_WR_Byte(OLED_GRAM[n][i],OLED_DATA); 
+		for(n=0;n<128;n++)	
+			OLED_WR_Byte(OLED_GRAM[n][i],OLED_DATA); // 写入数据到GRAM 
 	}   
 }
-#if OLED_MODE==1	//8080并口
+#if OLED_MODE == 1	//8080并口
 //通过拼凑的方法向OLED输出一个8位数据
 //data:要输出的数据
 void OLED_Data_Out(u8 data)
@@ -25,30 +26,27 @@ void OLED_Data_Out(u8 data)
 	u16 dat=data&0X0F;
 	GPIOC->ODR&=~(0XF<<6);		//清空6~9
 	GPIOC->ODR|=dat<<6;			//D[3:0]-->PC[9:6]
-    
     GPIOC->ODR&=~(0X1<<11);		//清空11
     GPIOC->ODR|=((data>>4)&0x01)<<11;
-    
     GPIOB->ODR&=~(0X1<<6);		//清空6
     GPIOB->ODR|=((data>>5)&0x01)<<6;
-    
     GPIOE->ODR&=~(0X3<<5);		//清空5,6
     GPIOE->ODR|=((data>>6)&0x01)<<5;
     GPIOE->ODR|=((data>>7)&0x01)<<6;
 } 
-//向SSD1306写入一个字节。
-//dat:要写入的数据/命令
-//cmd:数据/命令标志 0,表示命令;1,表示数据;
+// 向SSD1306写入一个字节。
+// dat:要写入的数据/命令
+// cmd:数据/命令标志 0,表示命令;1,表示数据;
 void OLED_WR_Byte(u8 dat,u8 cmd)
 {
-	OLED_Data_Out(dat);	
- 	OLED_RS=cmd;
-	OLED_CS=0;	
-	OLED_WR=0;	  
-	OLED_WR=1;   
-	OLED_CS=1;   
-	OLED_RS=1;   
-} 	    	    
+	OLED_Data_Out(dat); // 输出数据	
+ 	OLED_RS = cmd; // 写命令 
+	OLED_CS = 0;   // 拉低片选	
+	OLED_WR = 0;   // 拉低写数据线
+	OLED_WR = 1;   // 拉高写数据线，准备发送数据
+	OLED_CS = 1;   // 拉高片选，结束数据传输
+	OLED_RS = 1;   // 写命令 
+} // 下面的代码是SPI方式的驱动方式,可以参考	    	    
 #else
 //向SSD1306写入一个字节。
 //dat:要写入的数据/命令
@@ -211,7 +209,7 @@ void OLED_Init(void)
     __HAL_RCC_GPIOE_CLK_ENABLE();   //使能GPIOE时钟
     __HAL_RCC_GPIOG_CLK_ENABLE();   //使能GPIOG时钟
     
-#if OLED_MODE==1		//使用8080并口模式		
+#if OLED_MODE == 1		//使用8080并口模式		
 	
 	//GPIO初始化设置      
     GPIO_Initure.Pin=GPIO_PIN_4;         	//PA4
@@ -240,8 +238,8 @@ void OLED_Init(void)
 	GPIO_Initure.Pin=GPIO_PIN_15;	
 	HAL_GPIO_Init(GPIOG,&GPIO_Initure);//初始化	
 	
-	OLED_WR=1;
-  	OLED_RD=1; 
+	OLED_WR=1; // 8080并口模式下,WR为高电平有效，所以先置1
+  	OLED_RD=1; // 8080并口模式下,RD为高电平有效，所以先置1
 #else					//使用4线SPI 串口模式
 
 	//GPIO初始化设置      
@@ -266,6 +264,7 @@ void OLED_Init(void)
 	OLED_SDIN=1;
 	OLED_SCLK=1;
 #endif
+
 	OLED_CS=1;
 	OLED_RS=1;	 
 	

@@ -92,22 +92,7 @@ void TIM3_IRQHandler(void)
 }
 
 
-////»Øµ÷º¯Êý£¬¶¨Ê±Æ÷ÖÐ¶Ï·þÎñº¯Êýµ÷ÓÃ
-//void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-//{
-//    if(htim==(&TIM3_Handler))
-//    {
-//        LED1=!LED1;        //LED1·´×ª
-//    }
-//}
-
-
-/***************************************************************************
-****************************************************************************
-  ÏÂÃæÊÇÊäÈë²¶»ñÏà¹ØÔ´ÂëÊµÑéÏà¹Øº¯ÊýÔ´Âë
-****************************************************************************
-****************************************************************************/
-
+// ÏÂÃæÊÇ¶¨Ê±Æ÷5µÄÊäÈë²¶»ñ²¿·Ö
 TIM_HandleTypeDef TIM5_Handler; // ¶¨Ê±Æ÷5¾ä±ú
 
 // ¶¨Ê±Æ÷5Í¨µÀ1ÊäÈë²¶»ñÅäÖÃ
@@ -179,7 +164,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) // ¸üÐÂÖÐ¶Ï£¨Òç³ö£©·
 				{
 					TIM5CH1_CAPTURE_STA|=0X80;		// ±ê¼Ç³É¹¦²¶»ñÁËÒ»´Î
 					TIM5CH1_CAPTURE_VAL=0XFFFFFFFF; // ²¶»ñÖµÖÃÎª×î´óÖµ
-				}else TIM5CH1_CAPTURE_STA++; // ²¶»ñµ½Ò»´ÎµÍµçÆ½
+				}
+                else TIM5CH1_CAPTURE_STA++; // ²¶»ñµ½Ò»´ÎµÍµçÆ½
 			}	 
 	}		
 }
@@ -195,14 +181,15 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim) // ²¶»ñÖÐ¶Ï·¢ÉúÊ±Ö´ÐÐ
                 TIM5CH1_CAPTURE_VAL = HAL_TIM_ReadCapturedValue(&TIM5_Handler,TIM_CHANNEL_1); // »ñÈ¡µ±Ç°µÄ²¶»ñÖµ.
                 TIM_RESET_CAPTUREPOLARITY(&TIM5_Handler,TIM_CHANNEL_1);   // Ò»¶¨ÒªÏÈÇå³ýÔ­À´µÄÉèÖÃ£¡£¡
                 TIM_SET_CAPTUREPOLARITY(&TIM5_Handler,TIM_CHANNEL_1,TIM_ICPOLARITY_RISING); // ÅäÖÃTIM5Í¨µÀ1ÉÏÉýÑØ²¶»ñ
-			}else  								// »¹Î´¿ªÊ¼,µÚÒ»´Î²¶»ñÉÏÉýÑØ
+			}
+            else // »¹Î´¿ªÊ¼,µÚÒ»´Î²¶»ñÉÏÉýÑØ
 			{
-				TIM5CH1_CAPTURE_STA=0;			// Çå¿Õ
-				TIM5CH1_CAPTURE_VAL=0;
-				TIM5CH1_CAPTURE_STA|=0X40;		// ±ê¼Ç²¶»ñµ½ÁËÉÏÉýÑØ
-				__HAL_TIM_DISABLE(&TIM5_Handler);  // ¹Ø±Õ¶¨Ê±Æ÷5
+				TIM5CH1_CAPTURE_STA = 0;  // Çå¿Õ×´Ì¬
+				TIM5CH1_CAPTURE_VAL = 0;  // Çå¿Õ²¶»ñÖµ
+				TIM5CH1_CAPTURE_STA |= 0X40; // ±ê¼Ç²¶»ñµ½ÁËÉÏÉýÑØ
+				__HAL_TIM_DISABLE(&TIM5_Handler); // ¹Ø±Õ¶¨Ê±Æ÷5
 				__HAL_TIM_SET_COUNTER(&TIM5_Handler,0); // Çå¿Õ¼ÆÊýÆ÷
-				TIM_RESET_CAPTUREPOLARITY(&TIM5_Handler,TIM_CHANNEL_1);  // Ò»¶¨ÒªÏÈÇå³ýÔ­À´µÄÉèÖÃ£¡£¡
+				TIM_RESET_CAPTUREPOLARITY(&TIM5_Handler, TIM_CHANNEL_1);  // Ò»¶¨ÒªÏÈÇå³ýÔ­À´µÄÉèÖÃ£¡£¡
 				TIM_SET_CAPTUREPOLARITY(&TIM5_Handler,TIM_CHANNEL_1,TIM_ICPOLARITY_FALLING); // ¶¨Ê±Æ÷5Í¨µÀ1ÉèÖÃÎªÏÂ½µÑØ²¶»ñ
 				__HAL_TIM_ENABLE(&TIM5_Handler); // Ê¹ÄÜ¶¨Ê±Æ÷5
 			}		    

@@ -5,11 +5,7 @@
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [
-      {
-        "path": "../readme.txt"
-      }
-    ],
+    "files": [],
     "folders": [
       {
         "name": "USER",
@@ -287,7 +283,6 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/TIMER",
-          ".cmsis/include",
           "RTE/_ICAPTURE"
         ],
         "libList": [],

@@ -2,16 +2,10 @@
 #define __LCD_H		
 #include "sys.h"	 
 #include "stdlib.h" 
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//2.8寸/3.5寸/4.3寸/7寸 TFT液晶驱动	  
-//支持驱动IC型号包括:ILI9341/NT35310/NT35510/SSD1963/7789/9486/8488/7796 等		     
-//////////////////////////////////////////////////////////////////////////////////	 
 
 extern SRAM_HandleTypeDef TFTSRAM_Handler;    //SRAM句柄(用于控制LCD)
 
-//LCD重要参数集
+// LCD重要参数集
 typedef struct  
 {		 	 
 	u16 width;			//LCD 宽度
@@ -23,9 +17,9 @@ typedef struct
 	u16 setycmd;		//设置y坐标指令 
 }_lcd_dev; 	  
 
-//LCD参数
+// LCD参数
 extern _lcd_dev lcddev;	//管理LCD重要参数
-//LCD的画笔颜色和背景色	   
+// LCD的画笔颜色和背景色	   
 extern u32  POINT_COLOR;//默认红色    
 extern u32  BACK_COLOR; //背景颜色.默认为白色
 
@@ -33,14 +27,14 @@ extern u32  BACK_COLOR; //背景颜色.默认为白色
 //////////////////////////////////////////////////////////////////////////////////	 
 //-----------------MCU屏 LCD端口定义---------------- 
 #define	LCD_LED PBout(15) 	//LCD背光	PB15	    
-//LCD地址结构体
+// LCD地址结构体
 typedef struct
 {
 	vu16 LCD_REG;
 	vu16 LCD_RAM;
 } LCD_TypeDef;
-//使用NOR/SRAM的 Bank1.sector4,地址位HADDR[27,26]=11 A6作为数据命令区分线 
-//注意设置时STM32内部会右移一位对其! 111 1110=0X7E			    
+// 使用NOR/SRAM的 Bank1.sector4,地址位HADDR[27,26]=11 A6作为数据命令区分线 
+// 注意设置时STM32内部会右移一位对其! 111 1110=0X7E			    
 #define LCD_BASE        ((u32)(0x6C000000 | 0x0000007E))
 #define LCD             ((LCD_TypeDef *) LCD_BASE)
 //////////////////////////////////////////////////////////////////////////////////
