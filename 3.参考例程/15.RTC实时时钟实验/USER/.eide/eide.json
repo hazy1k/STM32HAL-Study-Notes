@@ -5,7 +5,11 @@
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [],
+    "files": [
+      {
+        "path": "../readme.txt"
+      }
+    ],
     "folders": [
       {
         "name": "USER",
