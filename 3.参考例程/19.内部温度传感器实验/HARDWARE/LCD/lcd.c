@@ -3,18 +3,12 @@
 #include "font.h" 
 #include "usart.h"	 
 #include "delay.h"	 
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32开发板
-//2.8寸/3.5寸/4.3寸/7寸 TFT液晶驱动	  
-//支持驱动IC型号包括:ILI9341/ILI9481/NT35310/NT35510/SSD1963/7789/9486/8488/7796等		     
-//////////////////////////////////////////////////////////////////////////////////	 
 
-SRAM_HandleTypeDef TFTSRAM_Handler;    //SRAM句柄(用于控制LCD)
+SRAM_HandleTypeDef TFTSRAM_Handler; // SRAM句柄(用于控制LCD)
 
-//LCD的画笔颜色和背景色	   
-u32 POINT_COLOR=0xFF000000;		//画笔颜色
-u32 BACK_COLOR =0xFFFFFFFF;  	//背景色 
+// LCD的画笔颜色和背景色	   
+u32 POINT_COLOR = 0xFF000000; // 画笔颜色
+u32 BACK_COLOR = 0xFFFFFFFF;  // 背景色 
 
 //管理LCD重要参数
 //默认为竖屏
@@ -2613,34 +2607,3 @@ void LCD_ShowString(u16 x,u16 y,u16 width,u16 height,u8 size,u8 *p)
         p++;
     }  
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,27 +2,10 @@
 #define _SYS_H
 #include "stm32f4xx.h"
 
-//////////////////////////////////////////////////////////////////////////////////	 
-//本程序只供学习使用，未经作者许可，不得用于其它任何用途
-//ALIENTEK STM32F407开发板
-//系统时钟初始化	
-//包括时钟设置/中断管理/GPIO设置等
-//正点原子@ALIENTEK
-//技术论坛:www.openedv.com
-//创建日期:2017/4/6
-//版本：V1.0
-//版权所有，盗版必究。
-//Copyright(C) 广州市星翼电子科技有限公司 2014-2024
-//All rights reserved
-//********************************************************************************
-//修改说明
-//无
-//////////////////////////////////////////////////////////////////////////////////  
+// 0,不支持os
+// 1,支持os
+#define SYSTEM_SUPPORT_OS	0 // 定义系统文件夹是否支持OS
 
-//0,不支持os
-//1,支持os
-#define SYSTEM_SUPPORT_OS		0		//定义系统文件夹是否支持OS
-///////////////////////////////////////////////////////////////////////////////////
 //定义一些常用的数据类型短关键字 
 typedef int32_t  s32;
 typedef int16_t s16;
@@ -56,13 +39,13 @@ typedef __I uint32_t vuc32;
 typedef __I uint16_t vuc16; 
 typedef __I uint8_t vuc8;  
 	 
-//位带操作,实现51类似的GPIO控制功能
-//具体实现思想,参考<<CM3权威指南>>第五章(87页~92页).M4同M3类似,只是寄存器地址变了.
-//IO口操作宏定义
+// 位带操作,实现51类似的GPIO控制功能
+// 具体实现思想,参考<<CM3权威指南>>第五章(87页~92页).M4同M3类似,只是寄存器地址变了.
+// IO口操作宏定义
 #define BITBAND(addr, bitnum) ((addr & 0xF0000000)+0x2000000+((addr &0xFFFFF)<<5)+(bitnum<<2)) 
 #define MEM_ADDR(addr)  *((volatile unsigned long  *)(addr)) 
 #define BIT_ADDR(addr, bitnum)   MEM_ADDR(BITBAND(addr, bitnum)) 
-//IO口地址映射
+// IO口地址映射
 #define GPIOA_ODR_Addr    (GPIOA_BASE+20) //0x40020014
 #define GPIOB_ODR_Addr    (GPIOB_BASE+20) //0x40020414 
 #define GPIOC_ODR_Addr    (GPIOC_BASE+20) //0x40020814 
@@ -87,8 +70,8 @@ typedef __I uint8_t vuc8;
 #define GPIOJ_IDR_Addr    (GPIOJ_BASE+16) //0x40022410 
 #define GPIOK_IDR_Addr    (GPIOK_BASE+16) //0x40022810 
 
-//IO口操作,只对单一的IO口!
-//确保n的值小于16!
+// IO口操作,只对单一的IO口!
+// 确保n的值小于16!
 #define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  //输出 
 #define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n)  //输入 
 
@@ -128,5 +111,5 @@ void WFI_SET(void);		//执行WFI指令
 void INTX_DISABLE(void);//关闭所有中断
 void INTX_ENABLE(void);	//开启所有中断
 void MSR_MSP(u32 addr);	//设置堆栈地址 
-#endif
 
+#endif
