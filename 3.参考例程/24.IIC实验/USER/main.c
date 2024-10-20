@@ -48,7 +48,6 @@ int main(void)
 			AT24CXX_Write(0,(u8*)TEXT_Buffer,SIZE); // 写入字符串数组到24c02
 			LCD_ShowString(30,170,200,16,16,"24C02 Write Finished!");//提示传送完成
 		}
-		if(key==KEY0_PRES)//KEY0按下,读取字符串并显示
 		{
 			LCD_ShowString(30,170,200,16,16,"Start Read 24C02.... ");
 			AT24CXX_Read(0,datatemp,SIZE);
@@ -64,4 +63,3 @@ int main(void)
 		}		   
 	} 
 }
-
