@@ -16,15 +16,15 @@ int main(void)
 	u16 i=0;
 	u8 datatemp[SIZE];
 	u32 FLASH_SIZE; 
-    HAL_Init();                  // 初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7); // 设置时钟,168Mhz
-	delay_init(168);             // 初始化延时函数
-	uart_init(115200);           // 初始化USART
-	usmart_dev.init(84); 		 // 初始化USMART
-	LED_Init();					 // 初始化LED	
-	KEY_Init();					 // 初始化KEY
- 	LCD_Init();           		 // 初始化LCD
-    W25QXX_Init();				 // W25QXX初始化
+    HAL_Init();                 // 初始化HAL库    
+    Stm32_Clock_Init(336,8,2,7);// 设置时钟,168Mhz
+	delay_init(168);            // 初始化延时函数
+	uart_init(115200);          // 初始化USART
+	usmart_dev.init(84); 		// 初始化USMART
+	LED_Init();					// 初始化LED	
+	KEY_Init();					// 初始化KEY
+ 	LCD_Init();           		// 初始化LCD
+    W25QXX_Init();				// W25QXX初始化
   	POINT_COLOR=RED;
 	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
 	LCD_ShowString(30,70,200,16,16,"SPI TEST");	 		
