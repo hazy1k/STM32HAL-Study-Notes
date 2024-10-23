@@ -14,27 +14,23 @@ int main(void)
 	u8 cnt=0;
 	u8 rs485buf[5]; 
 	
-    HAL_Init();                   	//初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
-	delay_init(168);               	//初始化延时函数
-	uart_init(115200);             	//初始化USART
-	usmart_dev.init(84); 		    //初始化USMART
-	LED_Init();						//初始化LED	
-	KEY_Init();						//初始化KEY
- 	LCD_Init();           			//初始化LCD
-	
-	RS485_Init(9600);		        //初始化RS485
+    HAL_Init();                 // 初始化HAL库    
+    Stm32_Clock_Init(336,8,2,7);// 设置时钟,168Mhz
+	delay_init(168);            // 初始化延时函数
+	uart_init(115200);          // 初始化USART
+	usmart_dev.init(84); 		// 初始化USMART
+	LED_Init();				    // 初始化LED	
+	KEY_Init();					// 初始化KEY
+ 	LCD_Init();           		// 初始化LCD
+	RS485_Init(9600);		    // 初始化RS485
   	POINT_COLOR=RED;
 	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
-	LCD_ShowString(30,70,200,16,16,"RS485 TEST");	
-	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
-	LCD_ShowString(30,110,200,16,16,"2017/4/14");	
+	LCD_ShowString(30,70,200,16,16,"RS485 TEST");		
 	LCD_ShowString(30,130,200,16,16,"KEY0:Send");    	//显示提示信息		
 	POINT_COLOR=BLUE;//设置字体为蓝色	  
-	LCD_ShowString(30,150,200,16,16,"Count:");			//显示当前计数值	
-	LCD_ShowString(30,170,200,16,16,"Send Data:");		//提示发送的数据	
-	LCD_ShowString(30,210,200,16,16,"Receive Data:");	//提示接收到的数据		
- 									  
+	LCD_ShowString(30,150,200,16,16,"Count:");			// 显示当前计数值	
+	LCD_ShowString(30,170,200,16,16,"Send Data:");		// 提示发送的数据	
+	LCD_ShowString(30,210,200,16,16,"Receive Data:");	// 提示接收到的数据		
 	while(1)
   	{
 	  	key=KEY_Scan(0);
@@ -64,4 +60,3 @@ int main(void)
 		 }		   
 	 }	
 }
-
