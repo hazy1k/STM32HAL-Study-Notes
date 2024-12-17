@@ -5,62 +5,24 @@
 
 int main(void)
 { 
-    HAL_Init();                    	//初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
-	delay_init(168);               	//初始化延时函数
-	LED_Init();						//初始化LED	
-	
+    HAL_Init();                 // 初始化HAL库,来源于"stm32f4xx_hal.c" 
+    // 设置时钟,168Mhz,来源于"sys.c" 函数参数：plln，pllm，pllp，pllq
+    // 部晶振为8M的时候,推荐值:plln=336,pllm=8,pllp=2,pllq=7.
+    // 得到:Fvco=8*(336/8)=336Mhz
+    //     SYSCLK=336/2=168Mhz
+    //     Fusb=336/7=48Mhz
+    Stm32_Clock_Init(336,8,2,7); // 系统时钟初始化
+	delay_init(168);             // 初始化延时函数,168Mhz系统时钟
+	LED_Init();					 // 初始化LED	
 	while(1)
 	{
-        HAL_GPIO_WritePin(GPIOF,GPIO_PIN_9, GPIO_PIN_RESET); // LED0对应引脚PF9拉低，亮，等同于LED0(0)
-        HAL_GPIO_WritePin(GPIOF,GPIO_PIN_10, GPIO_PIN_SET);  // LED1对应引脚PF10拉高，灭，等同于LED1(1)
-        delay_ms(500);									     // 延时500ms
-        HAL_GPIO_WritePin(GPIOF,GPIO_PIN_9,GPIO_PIN_SET);    // LED0对应引脚PF9拉高，灭，等同于LED0(1)
-        HAL_GPIO_WritePin(GPIOF,GPIO_PIN_10,GPIO_PIN_RESET); // LED1对应引脚PF10拉低，亮，等同于LED1(0)
-        delay_ms(500);                                       // 延时500ms 
+        // 亮LED0，灭LED1
+        HAL_GPIO_WritePin(LED0_GPIO, LED0_PIN, GPIO_PIN_RESET);  // 点亮LED0
+        HAL_GPIO_WritePin(LED1_GPIO, LED1_PIN, GPIO_PIN_SET);    // 熄灭LED1
+        delay_ms(500);  // 延时500ms
+        // 灭LED0，亮LED1
+        HAL_GPIO_WritePin(LED0_GPIO, LED0_PIN, GPIO_PIN_SET);    // 熄灭LED0
+        HAL_GPIO_WritePin(LED1_GPIO, LED1_PIN, GPIO_PIN_RESET);  // 点亮LED1
+        delay_ms(500);  // 延时500ms             
 	}
 }
-
-/*下面主函数使用位带操作实现：*/
-
-/*int main(void)
-{ 
-    HAL_Init();                    	//初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
-	delay_init(168);               	//初始化延时函数
-	LED_Init();						//初始化LED	
-	while(1)
-	{
-         LED0=0;			     	//LED0亮
-	     LED1=1;				 	//LED1灭
-		 delay_ms(500);
-		 LED0=1;					//LED0灭
-		 LED1=0;					//LED1亮
-		 delay_ms(500);
-	 }
-}*/
-
-
-
-
-/*
-下面主函数使用直接操作结存器方式实现跑马灯
-*/
-
-/*int main(void)
-{ 
-    HAL_Init();                    	//初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
-	delay_init(168);               	//初始化延时函数
-	LED_Init();						//初始化LED	
-
-	while(1)
-	{
-      GPIOF->BSRR=GPIO_PIN_9;     	//LED0亮
-	  GPIOF->BSRR=GPIO_PIN_10<<16; 	//LED1灭
-	  delay_ms(500);
-      GPIOF->BSRR=GPIO_PIN_9<<16; 	//LED0灭
-	  GPIOF->BSRR=GPIO_PIN_10;     	//LED1亮
-	  delay_ms(500);
-	 }
-}*/	
