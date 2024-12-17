@@ -27,9 +27,9 @@
 ### 2.1 CAN初始化
 
 ```c
-CAN_HandleTypeDef	CAN1_Handler; // CAN1句柄
-CAN_TxHeaderTypeDef	TxHeader;   // 发送
-CAN_RxHeaderTypeDef	RxHeader;   // 接收
+CAN_HandleTypeDef    CAN1_Handler; // CAN1句柄
+CAN_TxHeaderTypeDef    TxHeader;   // 发送
+CAN_RxHeaderTypeDef    RxHeader;   // 接收
 // CAN初始化
 // tsjw:重新同步跳跃时间单元.范围:CAN_SJW_1TQ~CAN_SJW_4TQ
 // tbs2:时间段2的时间单元.   范围:CAN_BS2_1TQ~CAN_BS2_8TQ;
@@ -43,22 +43,22 @@ CAN_RxHeaderTypeDef	RxHeader;   // 接收
 // 其他,初始化失败; 
 u8 CAN1_Mode_Init(u32 tsjw,u32 tbs2,u32 tbs1,u16 brp,u32 mode)
 {
-  CAN_InitTypeDef	CAN1_InitConf; // CAN1初始化配置结构体
+  CAN_InitTypeDef    CAN1_InitConf; // CAN1初始化配置结构体
   CAN1_Handler.Instance = CAN1;  // CAN1设备句柄
-	CAN1_Handler.Init = CAN1_InitConf;// CAN1初始化配置结构体
-  CAN1_Handler.Init.Prescaler=brp;	// 分频系数(Fdiv)为brp+1
-  CAN1_Handler.Init.Mode=mode;			// 模式设置 
+    CAN1_Handler.Init = CAN1_InitConf;// CAN1初始化配置结构体
+  CAN1_Handler.Init.Prescaler=brp;    // 分频系数(Fdiv)为brp+1
+  CAN1_Handler.Init.Mode=mode;            // 模式设置 
   CAN1_Handler.Init.SyncJumpWidth=tsjw;// 重新同步跳跃宽度(Tsjw)为tsjw+1个时间单位 CAN_SJW_1TQ~CAN_SJW_4TQ
-  CAN1_Handler.Init.TimeSeg1=tbs1;		 // tbs1范围CAN_BS1_1TQ~CAN_BS1_16TQ
-  CAN1_Handler.Init.TimeSeg2=tbs2;		 // tbs2范围CAN_BS2_1TQ~CAN_BS2_8TQ
+  CAN1_Handler.Init.TimeSeg1=tbs1;         // tbs1范围CAN_BS1_1TQ~CAN_BS1_16TQ
+  CAN1_Handler.Init.TimeSeg2=tbs2;         // tbs2范围CAN_BS2_1TQ~CAN_BS2_8TQ
   CAN1_Handler.Init.TimeTriggeredMode=DISABLE;// 非时间触发通信模式 
-  CAN1_Handler.Init.AutoBusOff=DISABLE;			  // 软件自动离线管理
-  CAN1_Handler.Init.AutoWakeUp=DISABLE;			  // 睡眠模式通过软件唤醒(清除CAN->MCR的SLEEP位)
+  CAN1_Handler.Init.AutoBusOff=DISABLE;              // 软件自动离线管理
+  CAN1_Handler.Init.AutoWakeUp=DISABLE;              // 睡眠模式通过软件唤醒(清除CAN->MCR的SLEEP位)
   CAN1_Handler.Init.AutoRetransmission=ENABLE;// 禁止报文自动传送 
   CAN1_Handler.Init.ReceiveFifoLocked=DISABLE;// 报文不锁定,新的覆盖旧的 
   CAN1_Handler.Init.TransmitFifoPriority=DISABLE;// 优先级由报文标识符决定 
-  if(HAL_CAN_Init(&CAN1_Handler)!=HAL_OK)			// 初始化
-		return 1;
+  if(HAL_CAN_Init(&CAN1_Handler)!=HAL_OK)            // 初始化
+        return 1;
   return 0;
 }
 ```
@@ -73,7 +73,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef* hcan)
 {
   GPIO_InitTypeDef GPIO_Initure;
   __HAL_RCC_CAN1_CLK_ENABLE();          // 使能CAN1时钟
-  __HAL_RCC_GPIOA_CLK_ENABLE();			    // 开启GPIOA时钟
+  __HAL_RCC_GPIOA_CLK_ENABLE();                // 开启GPIOA时钟
   GPIO_Initure.Pin=GPIO_PIN_11|GPIO_PIN_12;// PA11,12
   GPIO_Initure.Mode=GPIO_MODE_AF_PP;       // 推挽复用
   GPIO_Initure.Pull=GPIO_PULLUP;           // 上拉
@@ -105,16 +105,16 @@ void CAN_Config(void)
   {
     /* Filter configuration Error */
     while(1)
-	  {
-	  }
+      {
+      }
   }
   /*##-3- Start the CAN peripheral ###########################################*/
   if (HAL_CAN_Start(&CAN1_Handler) != HAL_OK)
   {
     /* Start Error */
     while(1)
-	  {
-	  }
+      {
+      }
   }
 
   /*##-4- Activate CAN RX notification #######################################*/
@@ -122,8 +122,8 @@ void CAN_Config(void)
   {
     /* Notification Error */
     while(1)
-	  {
-	  }
+      {
+      }
   }
 
   /*##-5- Configure Transmission process #####################################*/
@@ -139,16 +139,16 @@ void CAN_Config(void)
 ### 2.4 CAN发送数据函数
 
 ```c
-// can发送一组数据(固定格式:ID为0X12,标准帧,数据帧)	
-// len:数据长度(最大为8)				     
+// can发送一组数据(固定格式:ID为0X12,标准帧,数据帧)    
+// len:数据长度(最大为8)                     
 // msg:数据指针,最大为8个字节.
 // 返回值:0,成功;
-//		 其他,失败;
+//         其他,失败;
 u8 CAN1_Send_Msg(u8* msg,u8 len)
-{	
+{    
   u8 i=0;
-	u32 TxMailbox;
-	u8 message[8];
+    u32 TxMailbox;
+    u8 message[8];
   TxHeader.StdId = 0X12;       // 标准标识符
   TxHeader.ExtId = 0x12;       // 扩展标识符(29位)
   TxHeader.IDE = CAN_ID_STD;   // 使用标准帧
@@ -156,13 +156,13 @@ u8 CAN1_Send_Msg(u8* msg,u8 len)
   TxHeader.DLC = len; // 数据长度                
   for(i=0;i<len;i++)
   {
-		message[i]=msg[i];
-	}
+        message[i]=msg[i];
+    }
   if(HAL_CAN_AddTxMessage(&CAN1_Handler, &TxHeader, message, &TxMailbox) != HAL_OK)//发送
-	{
-		return 1;
-	}
-	while(HAL_CAN_GetTxMailboxesFreeLevel(&CAN1_Handler) != 3) {}
+    {
+        return 1;
+    }
+    while(HAL_CAN_GetTxMailboxesFreeLevel(&CAN1_Handler) != 3) {}
     return 0;
 }
 ```
@@ -171,24 +171,24 @@ u8 CAN1_Send_Msg(u8* msg,u8 len)
 
 ```c
 // can口接收数据查询
-// buf:数据缓存区;	 
+// buf:数据缓存区;     
 // 返回值:0,无数据被收到;
-//		 其他,接收的数据长度;
+//         其他,接收的数据长度;
 u8 CAN1_Receive_Msg(u8 *buf)
 {
- 	u32 i;
-	u8	RxData[8];
-	if(HAL_CAN_GetRxFifoFillLevel(&CAN1_Handler, CAN_RX_FIFO0) != 1)
-	{
-		return 0xF1;
-	}
-	if(HAL_CAN_GetRxMessage(&CAN1_Handler, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
-	{
-		return 0xF2;
-	}
+     u32 i;
+    u8    RxData[8];
+    if(HAL_CAN_GetRxFifoFillLevel(&CAN1_Handler, CAN_RX_FIFO0) != 1)
+    {
+        return 0xF1;
+    }
+    if(HAL_CAN_GetRxMessage(&CAN1_Handler, CAN_RX_FIFO0, &RxHeader, RxData) != HAL_OK)
+    {
+        return 0xF2;
+    }
     for(i=0;i<RxHeader.DLC;i++)
         buf[i]=RxData[i];
-	return RxHeader.DLC;
+    return RxHeader.DLC;
 }
 ```
 
@@ -197,81 +197,81 @@ u8 CAN1_Receive_Msg(u8 *buf)
 ```c
 int main(void)
 {
-   	u8 key;
-	u8 i=0,t=0;
-	u8 cnt=0;
-	u8 canbuf[8];
-	u8 res;
-	u8 mode=1; 	
+       u8 key;
+    u8 i=0,t=0;
+    u8 cnt=0;
+    u8 canbuf[8];
+    u8 res;
+    u8 mode=1;     
     HAL_Init();                 // 初始化HAL库    
     Stm32_Clock_Init(336,8,2,7);// 设置时钟,168Mhz
-	delay_init(168);            // 初始化延时函数
-	uart_init(115200);          // 初始化USART
-	usmart_dev.init(84); 		// 初始化USMART
-	LED_Init();				    // 初始化LED	
-	KEY_Init();					// 初始化KEY
- 	LCD_Init();           		// 初始化LCD
- 	CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_7TQ,6,CAN_MODE_LOOPBACK); // CAN初始化,波特率500Kbps     
-	CAN_Config(); // 配置CAN1
+    delay_init(168);            // 初始化延时函数
+    uart_init(115200);          // 初始化USART
+    usmart_dev.init(84);         // 初始化USMART
+    LED_Init();                    // 初始化LED    
+    KEY_Init();                    // 初始化KEY
+     LCD_Init();                   // 初始化LCD
+     CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_7TQ,6,CAN_MODE_LOOPBACK); // CAN初始化,波特率500Kbps     
+    CAN_Config(); // 配置CAN1
     POINT_COLOR=RED;
-	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
-	LCD_ShowString(30,70,200,16,16,"CAN TEST");	 		
-	LCD_ShowString(30,130,200,16,16,"LoopBack Mode");	 
-	LCD_ShowString(30,150,200,16,16,"KEY0:Send WK_UP:Mode");//显示提示信息		
-  	POINT_COLOR=BLUE;//设置字体为蓝色	  
-	LCD_ShowString(30,170,200,16,16,"Count:");		 // 显示当前计数值	
-	LCD_ShowString(30,190,200,16,16,"Send Data:");	 // 提示发送的数据	
-	LCD_ShowString(30,250,200,16,16,"Receive Data:");// 提示接收到的数据		
+    LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");    
+    LCD_ShowString(30,70,200,16,16,"CAN TEST");             
+    LCD_ShowString(30,130,200,16,16,"LoopBack Mode");     
+    LCD_ShowString(30,150,200,16,16,"KEY0:Send WK_UP:Mode");//显示提示信息        
+      POINT_COLOR=BLUE;//设置字体为蓝色      
+    LCD_ShowString(30,170,200,16,16,"Count:");         // 显示当前计数值    
+    LCD_ShowString(30,190,200,16,16,"Send Data:");     // 提示发送的数据    
+    LCD_ShowString(30,250,200,16,16,"Receive Data:");// 提示接收到的数据        
     while(1)
     {
         key=KEY_Scan(0);
-		if(key==KEY0_PRES)//KEY0按下,发送一次数据
-		{
-			for(i=0;i<8;i++)
-			{
-				canbuf[i]=cnt+i;//填充发送缓冲区
-				if(i<4)LCD_ShowxNum(30+i*32,210,canbuf[i],3,16,0X80);	//显示数据
-				else LCD_ShowxNum(30+(i-4)*32,230,canbuf[i],3,16,0X80);	//显示数据
- 			}
-			res=CAN1_Send_Msg(canbuf,8);// 发送8个字节 
-			if(res)LCD_ShowString(30+80,190,200,16,16,"Failed");		//提示发送失败
-			else LCD_ShowString(30+80,190,200,16,16,"OK    ");	 		//提示发送成功								   
-		}else if(key==WKUP_PRES)//WK_UP按下，改变CAN的工作模式
-		{	   
-			mode=!mode;
+        if(key==KEY0_PRES)//KEY0按下,发送一次数据
+        {
+            for(i=0;i<8;i++)
+            {
+                canbuf[i]=cnt+i;//填充发送缓冲区
+                if(i<4)LCD_ShowxNum(30+i*32,210,canbuf[i],3,16,0X80);    //显示数据
+                else LCD_ShowxNum(30+(i-4)*32,230,canbuf[i],3,16,0X80);    //显示数据
+             }
+            res=CAN1_Send_Msg(canbuf,8);// 发送8个字节 
+            if(res)LCD_ShowString(30+80,190,200,16,16,"Failed");        //提示发送失败
+            else LCD_ShowString(30+80,190,200,16,16,"OK    ");             //提示发送成功                                   
+        }else if(key==WKUP_PRES)//WK_UP按下，改变CAN的工作模式
+        {       
+            mode=!mode;
             if(mode==0)  CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_7TQ,6,CAN_MODE_NORMAL);        //回环模式,波特率500Kbps
             else if(mode==1) CAN1_Mode_Init(CAN_SJW_1TQ,CAN_BS2_6TQ,CAN_BS1_7TQ,6,CAN_MODE_LOOPBACK);  //回环模式,波特率500Kbps
-			CAN_Config();
-  			POINT_COLOR=RED;//设置字体为红色 
-			if(mode==0)//普通模式，需要2个开发板
-			{
-				LCD_ShowString(30,130,200,16,16,"Nnormal Mode ");	    
-			}else //回环模式,一个开发板就可以测试了.
-			{
- 				LCD_ShowString(30,130,200,16,16,"LoopBack Mode");
-			}
- 			POINT_COLOR=BLUE;//设置字体为蓝色 
-		}		 
-		key=CAN1_Receive_Msg(canbuf);
-		if(key < 9)//接收到有数据
-		{			
-			LCD_Fill(30,270,160,310,WHITE);//清除之前的显示
- 			for(i=0;i<key;i++)
-			{									    
-				if(i<4)LCD_ShowxNum(30+i*32,270,canbuf[i],3,16,0X80);	//显示数据
-				else LCD_ShowxNum(30+(i-4)*32,290,canbuf[i],3,16,0X80);	//显示数据
- 			}
-		}
-		t++; 
-		delay_ms(10);
-		if(t==20)
-		{
-			LED0=!LED0;//提示系统正在运行	
-			t=0;
-			cnt++;
-			LCD_ShowxNum(30+48,170,cnt,3,16,0X80);	//显示数据
-		}		   
-	} 	
+            CAN_Config();
+              POINT_COLOR=RED;//设置字体为红色 
+            if(mode==0)//普通模式，需要2个开发板
+            {
+                LCD_ShowString(30,130,200,16,16,"Nnormal Mode ");        
+            }else //回环模式,一个开发板就可以测试了.
+            {
+                 LCD_ShowString(30,130,200,16,16,"LoopBack Mode");
+            }
+             POINT_COLOR=BLUE;//设置字体为蓝色 
+        }         
+        key=CAN1_Receive_Msg(canbuf);
+        if(key < 9)//接收到有数据
+        {            
+            LCD_Fill(30,270,160,310,WHITE);//清除之前的显示
+             for(i=0;i<key;i++)
+            {                                        
+                if(i<4)LCD_ShowxNum(30+i*32,270,canbuf[i],3,16,0X80);    //显示数据
+                else LCD_ShowxNum(30+(i-4)*32,290,canbuf[i],3,16,0X80);    //显示数据
+             }
+        }
+        t++; 
+        delay_ms(10);
+        if(t==20)
+        {
+            LED0=!LED0;//提示系统正在运行    
+            t=0;
+            cnt++;
+            LCD_ShowxNum(30+48,170,cnt,3,16,0X80);    //显示数据
+        }           
+    }     
 }
 ```
 
@@ -403,5 +403,3 @@ int main(void) {
     }
 }
 ```
-
-
