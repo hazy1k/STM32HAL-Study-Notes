@@ -4,7 +4,7 @@
 ..\obj\usart.o: ..\USER\stm32f4xx.h
 ..\obj\usart.o: ..\USER\stm32f407xx.h
 ..\obj\usart.o: ..\CORE\core_cm4.h
-..\obj\usart.o: E:\dianzi\MDK\ARM\AC5\Bin\..\include\stdint.h
+..\obj\usart.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\stdint.h
 ..\obj\usart.o: ..\CORE\cmsis_version.h
 ..\obj\usart.o: ..\CORE\cmsis_compiler.h
 ..\obj\usart.o: ..\CORE\cmsis_armcc.h
@@ -16,7 +16,7 @@
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 ..\obj\usart.o: ..\USER\stm32f4xx.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\usart.o: E:\dianzi\MDK\ARM\AC5\Bin\..\include\stddef.h
+..\obj\usart.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\stddef.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h
@@ -66,5 +66,5 @@
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h
 ..\obj\usart.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
-..\obj\usart.o: E:\dianzi\MDK\ARM\AC5\Bin\..\include\stdio.h
+..\obj\usart.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\stdio.h
 ..\obj\usart.o: ..\SYSTEM\delay\delay.h

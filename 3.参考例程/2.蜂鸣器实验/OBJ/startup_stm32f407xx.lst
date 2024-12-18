@@ -880,10 +880,9 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\obj\startup_stm32f407xx.d -o..\obj\startup_stm32f407xx.o 
--IE:\dianzi\MDK\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4
-xx\Include --predefine="__EVAL SETA 1" --predefine="__UVISION_VERSION SETA 540"
- --predefine="STM32F407xx SETA 1" --list=..\obj\startup_stm32f407xx.lst ..\CORE
-\startup_stm32f407xx.s
+-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\I
+nclude --predefine="__UVISION_VERSION SETA 538" --predefine="STM32F407xx SETA 1
+" --list=..\obj\startup_stm32f407xx.lst ..\CORE\startup_stm32f407xx.s
 
 
 
@@ -1987,4 +1986,4 @@ Symbol: __use_two_region_memory
       None
 Comment: __use_two_region_memory unused
 3 symbols
-448 symbols in table
+447 symbols in table
