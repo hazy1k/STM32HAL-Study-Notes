@@ -6,34 +6,31 @@
 
 int main(void)
 {
-	u8 key; // 按键扫描值
-	
-    HAL_Init();                   // 初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  // 设置时钟,168Mhz
-	delay_init(168);              // 初始化延时函数
-	LED_Init();					  // 初始化LED	
-    KEY_Init();                   // 初始化按键
-	
-    while(1)
-    {
-        key = KEY_Scan(0); // 按键扫描
-		switch(key)
-		{				 
-			case WKUP_PRES:	// 控制LED0,LED1互斥点亮
+	uint8_t key_value;
+	HAL_Init();
+	Stm32_Clock_Init(336,8,2,7);
+	delay_init(168);
+	LED_Init();
+	KEY_Init();
+	while(1)
+	{
+		key_value = KEY_Scan(0);
+		switch(key_value)
+		{
+			case KEY_UP_PRES: // LED0,LED1互斥
 				LED1 = !LED1;
 				LED0 = !LED1;
 				break;
-			case KEY2_PRES: // 控制LED0翻转
-				LED0 = !LED0;
-				break;
-			case KEY1_PRES: // 控制LED1翻转	 
-				LED1 = !LED1;
-				break;
-			case KEY0_PRES: // 同时控制LED0,LED1翻转 
+			case KEY0_PRES: // LED0,LED1同时翻转
 				LED0 = !LED0;
 				LED1 = !LED1;
+				break;
+			case KEY1_PRES:
+				LED1 = !LED1;
+				break;
+			case KEY2_PRES:
+				LED0 = !LED0;
 				break;
 		}
-        delay_ms(10);
 	}
 }
