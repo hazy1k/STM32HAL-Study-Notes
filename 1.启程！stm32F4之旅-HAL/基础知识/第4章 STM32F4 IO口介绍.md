@@ -2,10 +2,6 @@
 
 ## 1. 导入
 
-首先要提一下，在 HAL 库中， GPIO 端口操作对应的 HAL 库函数函数以及相关定义在文件 stm32f4xx_hal_gpio.h 和 stm32f4xx_hal_gpio.c 中。
-
-相对于 STM32F1 来说， STM32F4 的 GPIO 设置显得更为复杂，也更加灵活，尤其是复用功能部分，比 STM32F1 改进了很多，使用起来更加方便。
-
 STM32F4 每组通用 I/O 端口包括 4 个 32 位配置寄存器（MODER、 OTYPER、 OSPEEDR和 PUPDR）、 2 个 32 位数据寄存器（IDR 和 ODR）、 1 个 32 位置位/复位寄存器 (BSRR)、1 个 32 位锁定寄存器 (LCKR) 和 2 个 32 位复用功能选择寄存器（AFRH 和 AFRL）等。
 
 这样， STM32F4 每组 IO 有 10 个 32 位寄存器控制，其中常用的有 4 个配置寄存器 + 2 个数据寄存器 + 2 个复用功能选择寄存器，共 8 个，如果在使用的时候，每次都直接操作寄存器配置IO， 代码会比较多，也不容易记住，所以我们在讲解寄存器的同时会讲解使用 HAL 库函数配置 IO 的方法。
@@ -27,6 +23,8 @@ STM32F4 每组通用 I/O 端口包括 4 个 32 位配置寄存器（MODER、 OTY
 - 推挽式复用功能
 
 - 开漏式复用功能
+
+关于这8种模式的更多介绍：[明解STM32—GPIO理论基础知识篇之八种工作模式 - 知乎](https://zhuanlan.zhihu.com/p/612432573)
 
 ## 2. 相关寄存器介绍
 
@@ -352,6 +350,81 @@ int main(void) {
 }
 ```
 
+## 3. HAL库配置IO
+
+### 3.1 输出模式（Push-Pull 或 Open-Drain）
+
+**推挽输出**：通常用于控制 LED、继电器等输出设备。这是最常用的输出模式。
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_5;
+GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;  // 推挽输出模式
+GPIO_InitStruct.Pull = GPIO_NOPULL;          // 不使用上拉/下拉电阻
+GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+```
+
+**开漏输出**：用于 I2C 等需要开漏通信的场合。
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_5;
+GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;  // 开漏输出模式
+GPIO_InitStruct.Pull = GPIO_PULLUP;          // 使用上拉电阻
+GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+```
+
+### 3.2 输入模式（Analog, Digital, or Interrupt）
+
+**普通输入模式**：用于读取外部信号。
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_5;
+GPIO_InitStruct.Mode = GPIO_MODE_INPUT;      // 输入模式
+GPIO_InitStruct.Pull = GPIO_PULLDOWN;        // 使用下拉电阻
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+```
+
+**中断输入模式**：用于 GPIO 引脚的中断触发。
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_5;
+GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;  // 上升沿中断
+GPIO_InitStruct.Pull = GPIO_NOPULL;          // 不使用上拉/下拉电阻
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+```
+
+### 3.3 模拟模式
+
+模拟模式一般用于 ADC 和 DAC 的引脚。此模式下，GPIO 会进入低功耗模式，不会进行数字化操作。
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_5;
+GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;     // 模拟模式
+GPIO_InitStruct.Pull = GPIO_NOPULL;          // 不使用上拉/下拉电阻
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+```
+
+### 3.4 复用功能模式
+
+STM32F4 的 GPIO 支持复用功能，用于外设接口如 UART、SPI、I2C 等。通过设置 `GPIO_MODE_AF_PP` 或 `GPIO_MODE_AF_OD`，并指定具体的复用功能编号，GPIO 可以用作这些外设的信号接口。
+
+例如，配置一个 UART 的 TX 引脚：
+
+```c
+GPIO_InitStruct.Pin = GPIO_PIN_9;               // 选择 TX 引脚
+GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;         // 复用推挽输出
+GPIO_InitStruct.Pull = GPIO_PULLUP;             // 上拉电阻
+GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;   // 高速
+HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);         // 初始化 GPIOA
+```
+
+## 4. 小结
+
+本章我们就主要介绍了STM32F4 GPIO相关的寄存器，但是我们在开发的时候往往不直接配置寄存器，比如我们可以使用HAL库
+
 ---
 
 2024.9.26 第一次修订，后期不再维护
+
+2024.12.20 更新HAL库配置
