@@ -1,5 +1,5 @@
 {
-  "name": "UART",
+  "name": "Template",
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [],
@@ -33,13 +33,7 @@
         "name": "CORE",
         "files": [
           {
-            "path": "../CORE/core_cm4.h"
-          },
-          {
             "path": "../CORE/cmsis_armcc.h"
-          },
-          {
-            "path": "../CORE/startup_stm32f407xx.s"
           },
           {
             "path": "../CORE/cmsis_armclang.h"
@@ -51,7 +45,13 @@
             "path": "../CORE/cmsis_version.h"
           },
           {
+            "path": "../CORE/core_cm4.h"
+          },
+          {
             "path": "../CORE/mpu_armv7.h"
+          },
+          {
+            "path": "../CORE/startup_stm32f407xx.s"
           }
         ],
         "folders": []
@@ -75,12 +75,6 @@
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c"
           },
           {
-            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
-          },
-          {
-            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
-          },
-          {
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_uart.c"
           },
           {
@@ -91,6 +85,78 @@
           },
           {
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_adc_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_can.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cec.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_crc.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dac_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dcmi_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma2d.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_eth.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_exti.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_flash_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2c_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_i2s_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_ltdc_ex.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c"
+          },
+          {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c"
           }
         ],
         "folders": []
@@ -111,20 +177,23 @@
         "folders": []
       },
       {
-        "name": "HARDWARE",
-        "files": [
-          {
-            "path": "../HARDWARE/LED/led.c"
-          },
-          {
-            "path": "../HARDWARE/KEY/key.c"
-          }
-        ],
+        "name": "README",
+        "files": [],
         "folders": []
       },
       {
-        "name": "README",
-        "files": [],
+        "name": "HARDWARE",
+        "files": [
+          {
+            "path": "../HARDWARE/BEEP/beep.c"
+          },
+          {
+            "path": "../HARDWARE/KEY/key.c"
+          },
+          {
+            "path": "../HARDWARE/LED/led.c"
+          }
+        ],
         "folders": []
       }
     ]
@@ -133,10 +202,10 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "f21d997dd8f17a062a6af1fa53249389"
+    "uid": "356a8d143db922437e138ed11b12e00b"
   },
   "targets": {
-    "UART": {
+    "Template": {
       "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
@@ -275,10 +344,11 @@
           "../SYSTEM/sys",
           "../SYSTEM/usart",
           "../HALLIB/STM32F4xx_HAL_Driver/Inc",
-          "../HARDWARE/LED",
+          "../HARDWARE/BEEP",
           "../HARDWARE/KEY",
+          "../HARDWARE/LED",
           ".cmsis/include",
-          "RTE/_UART"
+          "RTE/_Template"
         ],
         "libList": [],
         "defineList": [

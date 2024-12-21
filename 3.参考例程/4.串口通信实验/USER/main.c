@@ -1,46 +1,30 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"
-#include "led.h"
-#include "key.h"
+#include "string.h"
+
+extern UART_HandleTypeDef UART1_Handler; // 串口句柄
 
 int main(void)
 {
-	u8 len; // 接收到的数据长度	
-	u16 times = 0; // 接收到的数据次数
-	
-    HAL_Init();                  // 初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7); // 设置时钟,168Mhz
-	delay_init(168);             // 初始化延时函数
-	uart_init(115200);           // 初始化USART
-	LED_Init();				     // 初始化LED	
-    KEY_Init();                  // 初始化按键
-	
+    HAL_Init();
+    UART_Init(115200);  // 初始化串口1，波特率115200
+
+    uint8_t buf[100];   // 接收缓冲区
+    uint16_t len = 0;   // 接收到的长度
+
     while(1)
     {
-			
-       if(USART_RX_STA&0x8000) // 判断是否有数据接收
-		{					   
-			len = USART_RX_STA&0x3fff;//得到此次接收到的数据长度
-			printf("\r\n您发送的消息为:\r\n");
-			HAL_UART_Transmit(&UART1_Handler,(uint8_t*)USART_RX_BUF,len,1000);	// 发送接收到的数据
-			while(__HAL_UART_GET_FLAG(&UART1_Handler,UART_FLAG_TC)!=SET);		// 等待发送结束
-			printf("\r\n\r\n"); // 插入换行
-			USART_RX_STA = 0; // 清空接收状态
-		}
-		else
-		{
-			times++;
-			if(times % 5000 == 0)
-			{
-				printf("\r\nALIENTEK 探索者STM32F407开发板 串口实验\r\n");
-				printf("正点原子@ALIENTEK\r\n\r\n\r\n");
-			}
-			if(times % 200 ==0 )
-				printf("请输入数据,以回车键结束\r\n");  
-			if(times %30 == 0)
-				LED0=!LED0;//闪烁LED,提示系统正在运行.
-			delay_ms(10);   
-		} 
+        memset(buf, 0, sizeof(buf));  // 清空接收缓冲区
+        HAL_UART_Receive(&UART1_Handler, buf, 100, 100); // 接收数据
+        
+        // 找到接收到的数据末尾并手动添加结束符
+        len = strlen((char*)buf); 
+        if (len > 0 && buf[len - 1] != '\0') 
+        {
+            buf[len] = '\0'; // 确保字符串以NULL结尾
+        }
+
+        HAL_UART_Transmit(&UART1_Handler, buf, len, 100); // 发送接收到的字符串
     }
 }
