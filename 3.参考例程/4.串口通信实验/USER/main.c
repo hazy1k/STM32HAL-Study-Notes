@@ -8,6 +8,7 @@ extern UART_HandleTypeDef UART1_Handler; // 串口句柄
 int main(void)
 {
     HAL_Init();
+		Stm32_Clock_Init(336,8,2,7);
     UART_Init(115200);  // 初始化串口1，波特率115200
 
     uint8_t buf[100];   // 接收缓冲区

@@ -67,6 +67,4 @@
 ..\obj\main.o: ..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h
 ..\obj\main.o: ..\SYSTEM\delay\delay.h
 ..\obj\main.o: ..\SYSTEM\usart\usart.h
-..\obj\main.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\stdio.h
-..\obj\main.o: ..\HARDWARE\LED\led.h
-..\obj\main.o: ..\HARDWARE\KEY\key.h
+..\obj\main.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\string.h

@@ -139,7 +139,7 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "958c87baca2f9f91553150191796e067"
+    "uid": "8544afcf8abdd3133961a7ed10c9cf47"
   },
   "targets": {
     "IWDG": {
@@ -284,6 +284,7 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/IWDG",
+          ".cmsis/include",
           "RTE/_IWDG"
         ],
         "libList": [],
