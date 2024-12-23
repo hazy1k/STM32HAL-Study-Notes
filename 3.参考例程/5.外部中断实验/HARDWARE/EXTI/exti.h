@@ -1,6 +1,7 @@
-#ifndef _EXTI_H
-#define _EXTI_H
+#ifndef __EXTI_H
+#define __EXTI_h
 #include "sys.h"
 
+void EXTI_Init(void);
 
 #endif
