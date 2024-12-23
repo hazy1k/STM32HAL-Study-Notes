@@ -3,6 +3,9 @@
 "..\obj\stm32f4xx_it.o"
 "..\obj\system_stm32f4xx.o"
 "..\obj\stm32f4xx_hal_msp.o"
+"..\obj\beep.o"
+"..\obj\key.o"
+"..\obj\led.o"
 "..\obj\startup_stm32f407xx.o"
 "..\obj\stm32f4xx_hal.o"
 "..\obj\stm32f4xx_hal_cortex.o"
@@ -40,9 +43,6 @@
 "..\obj\delay.o"
 "..\obj\sys.o"
 "..\obj\usart.o"
-"..\obj\beep.o"
-"..\obj\key.o"
-"..\obj\led.o"
 --strict --scatter "..\OBJ\Template.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

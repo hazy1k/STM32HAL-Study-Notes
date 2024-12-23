@@ -404,6 +404,21 @@
               <FileType>1</FileType>
               <FilePath>.\stm32f4xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>beep.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\BEEP\beep.c</FilePath>
+            </File>
+            <File>
+              <FileName>key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\KEY\key.c</FilePath>
+            </File>
+            <File>
+              <FileName>led.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\LED\led.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -643,26 +658,6 @@
               <FileName>readme.txt</FileName>
               <FileType>5</FileType>
               <FilePath>..\readme.txt</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>HARDWARE</GroupName>
-          <Files>
-            <File>
-              <FileName>beep.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\BEEP\beep.c</FilePath>
-            </File>
-            <File>
-              <FileName>key.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\KEY\key.c</FilePath>
-            </File>
-            <File>
-              <FileName>led.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\LED\led.c</FilePath>
             </File>
           </Files>
         </Group>

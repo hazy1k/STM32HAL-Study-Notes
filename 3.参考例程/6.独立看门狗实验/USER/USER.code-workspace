@@ -18,7 +18,16 @@
             "iwdg.h": "c",
             "usart.h": "c",
             "delay.h": "c"
-        }
+        },
+        "MicroPython.syncButton": [
+            {
+                "text": "$(sync)",
+                "tooltip": "同步",
+                "alignment": "left",
+                "command": "extension.execute",
+                "priority": 4
+            }
+        ]
     },
     "extensions": {}
 }

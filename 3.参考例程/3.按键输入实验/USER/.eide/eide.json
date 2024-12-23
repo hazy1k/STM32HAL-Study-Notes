@@ -5,11 +5,7 @@
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [
-      {
-        "path": "../readme.txt"
-      }
-    ],
+    "files": [],
     "folders": [
       {
         "name": "USER",
@@ -25,6 +21,15 @@
           },
           {
             "path": "stm32f4xx_hal_msp.c"
+          },
+          {
+            "path": "../HARDWARE/BEEP/beep.c"
+          },
+          {
+            "path": "../HARDWARE/KEY/key.c"
+          },
+          {
+            "path": "../HARDWARE/LED/led.c"
           }
         ],
         "folders": []
@@ -180,21 +185,6 @@
         "name": "README",
         "files": [],
         "folders": []
-      },
-      {
-        "name": "HARDWARE",
-        "files": [
-          {
-            "path": "../HARDWARE/BEEP/beep.c"
-          },
-          {
-            "path": "../HARDWARE/KEY/key.c"
-          },
-          {
-            "path": "../HARDWARE/LED/led.c"
-          }
-        ],
-        "folders": []
       }
     ]
   },
@@ -202,7 +192,7 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "bbb0987d568179124a4e89c887354e43"
+    "uid": "88fae650de05d1c4936021fdba25cf3e"
   },
   "targets": {
     "Template": {
