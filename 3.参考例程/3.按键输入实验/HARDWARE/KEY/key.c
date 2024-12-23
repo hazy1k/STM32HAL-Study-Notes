@@ -9,7 +9,7 @@ void KEY_Init(void)
     __HAL_RCC_GPIOE_CLK_ENABLE();
     // 接下来配置GPIO
     GPIO_InitStructure.Pin = KEY_UP_PIN;            // key_up引脚
-    GPIO_InitStructure.Mode = GPIO_MODE_INPUT;      // s输入模式
+    GPIO_InitStructure.Mode = GPIO_MODE_INPUT;      // 输入模式
     GPIO_InitStructure.Pull = GPIO_PULLDOWN;        // 下拉
     GPIO_InitStructure.Speed = GPIO_SPEED_HIGH;     // 高速
     HAL_GPIO_Init(KEY_UP_GPIO, &GPIO_InitStructure);// 初始化GPIO

@@ -27,23 +27,11 @@ Project File Date:  12/22/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\dianzi\MDKv5\ARM\AC5\Bin'
 Build target 'EXTI'
-compiling exti.c...
-..\HARDWARE\EXTI\exti.c(71): error:  #20: identifier "WK_UP" is undefined
-              if(WK_UP == 1) 
-..\HARDWARE\EXTI\exti.c(78): error:  #20: identifier "KEY2" is undefined
-              if(KEY2 == 0) // LED1翻转
-..\HARDWARE\EXTI\exti.c(84): error:  #20: identifier "KEY1" is undefined
-              if(KEY1 == 0) // 同时控制LED0,LED1翻转 
-..\HARDWARE\EXTI\exti.c(91): error:  #20: identifier "KEY0" is undefined
-              if(KEY0 == 0)  
-..\HARDWARE\EXTI\exti.c(97): warning:  #1-D: last line of file ends without a newline
-  }
-..\HARDWARE\EXTI\exti.c: 1 warning, 4 errors
 compiling main.c...
-main.c(23): warning:  #1-D: last line of file ends without a newline
-  }
-main.c: 1 warning, 0 errors
-"..\OBJ\Template.axf" - 4 Error(s), 2 Warning(s).
+linking...
+Program Size: Code=1300 RO-data=424 RW-data=16 ZI-data=1896  
+FromELF: creating hex file...
+"..\OBJ\Template.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -56,7 +44,6 @@ Package Vendor: Keil
   E:/dianzi/MDKv5/Keil/STM32F4xx_DFP/2.13.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
 
 <h2>Collection of Component Files used:</h2>
-Target not created.
 Build Time Elapsed:  00:00:00
 </pre>
 </body>

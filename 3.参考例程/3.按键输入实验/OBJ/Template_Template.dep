@@ -1,6 +1,6 @@
 Dependencies for Project 'Template', Target 'Template': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\AC5
-F (.\main.c)(0x67652DB1)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\main.o --depend ..\obj\main.d)
+F (.\main.c)(0x676531FF)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\main.o --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x67616C32)
 I (..\USER\stm32f4xx.h)(0x5D8194E8)
 I (..\USER\stm32f407xx.h)(0x5D8194E8)
@@ -69,8 +69,8 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x5D8195BF)
 I (..\SYSTEM\delay\delay.h)(0x67616C20)
 I (..\SYSTEM\usart\usart.h)(0x66E04E57)
 I (E:\dianzi\MDKv5\ARM\AC5\include\stdio.h)(0x5E8E3CC2)
-I (..\HARDWARE\LED\led.h)(0x67652D44)
-I (..\HARDWARE\KEY\key.h)(0x67652BC3)
+I (..\HARDWARE\LED\led.h)(0x67653109)
+I (..\HARDWARE\KEY\key.h)(0x67653268)
 F (.\stm32f4xx_it.c)(0x5D819589)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\stm32f4xx_it.o --depend ..\obj\stm32f4xx_it.d)
 I (main.h)(0x58A31CD8)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x5D8195BF)
@@ -2691,8 +2691,8 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x5D8195BF)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x5D8195C0)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x5D8195BF)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x5D8195BF)
-F (..\HARDWARE\KEY\key.c)(0x67652B7E)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\key.o --depend ..\obj\key.d)
-I (..\HARDWARE\KEY\key.h)(0x67652BC3)
+F (..\HARDWARE\KEY\key.c)(0x6769615E)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\key.o --depend ..\obj\key.d)
+I (..\HARDWARE\KEY\key.h)(0x67653268)
 I (..\SYSTEM\sys\sys.h)(0x67616C32)
 I (..\USER\stm32f4xx.h)(0x5D8194E8)
 I (..\USER\stm32f407xx.h)(0x5D8194E8)
@@ -2760,7 +2760,7 @@ I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x5D8195BF)
 I (..\HALLIB\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x5D8195BF)
 I (..\SYSTEM\delay\delay.h)(0x67616C20)
 F (..\HARDWARE\LED\led.c)(0x67625C24)(-c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ..\CORE -I ..\OBJ -I ..\USER -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HALLIB\STM32F4xx_HAL_Driver\Inc -I ..\HARDWARE\BEEP -I ..\HARDWARE\KEY -I ..\HARDWARE\LED-IE:\dianzi\MDKv5\Keil\STM32F4xx_DFP\2.13.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="538" -DSTM32F407xx -DUSE_HAL_DRIVER -DSTM32F407xx --C99-o ..\obj\led.o --depend ..\obj\led.d)
-I (..\HARDWARE\LED\led.h)(0x67652D44)
+I (..\HARDWARE\LED\led.h)(0x67653109)
 I (..\SYSTEM\sys\sys.h)(0x67616C32)
 I (..\USER\stm32f4xx.h)(0x5D8194E8)
 I (..\USER\stm32f407xx.h)(0x5D8194E8)
