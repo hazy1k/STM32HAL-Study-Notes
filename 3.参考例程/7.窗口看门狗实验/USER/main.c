@@ -1,23 +1,30 @@
 #include "sys.h"
 #include "delay.h"
 #include "usart.h"
-#include "led.h"
 #include "key.h"
+#include "led.h"
 #include "wwdg.h"
 
 int main(void)
 {
-  HAL_Init();                   // ³õÊ¼»¯HAL¿â    
-  Stm32_Clock_Init(336,8,2,7);  // ÉèÖÃÊ±ÖÓ,168Mhz
-	delay_init(168);              // ³õÊ¼»¯ÑÓÊ±º¯Êı
-	uart_init(115200);            // ³õÊ¼»¯USART
-	LED_Init();						        // ³õÊ¼»¯LED	
-  KEY_Init();                   // ³õÊ¼»¯°´¼ü
-  LED0 = 0;                     // µãÁÁLED0
-  delay_ms(300);                // ÑÓÊ±300msÔÙ³õÊ¼»¯¿´ÃÅ¹·,LED0µÄ±ä»¯"¿É¼û"
-  WWDG_Init(0X7F,0X5F,WWDG_PRESCALER_8); // ¼ÆÊıÆ÷ÖµÎª7F£¬´°¿Ú¼Ä´æÆ÷Îª5F£¬·ÖÆµÊıÎª8
-  while(1)
-  {	
-	  LED0=1; // Ï¨ÃğLEDµÆ 
-  }
+	HAL_Init();
+	Stm32_Clock_Init(336,8,2,7);
+	delay_init(168);
+	uart_init(115200);
+	KEY_Init();
+	LED_Init();
+
+	LED0_ON();
+	delay_ms(300); // å»¶æ—¶300mså†å¯åŠ¨çœ‹é—¨ç‹—
+
+	// çª—å£çœ‹é—¨ç‹—è®¡ç®—å…¬å¼
+	/*
+		Fwwdg = PCLK1/(4096*(2^fp)) ,å…¶ä¸­PCLK1ä¸ºæ—¶é’Ÿé¢‘ç‡ä¸€èˆ¬ä¸º42Mhz
+		å‡½æ•°å‚æ•°ï¼šè®¡æ•°å€¼ã€çª—å£å€¼ã€åˆ†é¢‘ç³»æ•°
+	*/
+	WWDG_Init(0x7F, 0x5F, WWDG_PRESCALER_8); // 42Mhz/(4096*(2^8))=40Hz, çª—å£å€¼=0x5F, è®¡æ•°å€¼=0x7F
+	while(1)
+	{
+		LED0_OFF();
+	}
 }

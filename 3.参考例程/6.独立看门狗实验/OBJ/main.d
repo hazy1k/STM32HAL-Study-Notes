@@ -70,3 +70,4 @@
 ..\obj\main.o: E:\dianzi\MDKv5\ARM\AC5\Bin\..\include\stdio.h
 ..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
+..\obj\main.o: ..\HARDWARE\IWDG\iwdg.h

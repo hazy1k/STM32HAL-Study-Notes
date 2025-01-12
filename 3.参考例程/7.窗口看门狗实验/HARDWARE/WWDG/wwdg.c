@@ -1,44 +1,44 @@
 #include "wwdg.h"
 #include "led.h"
 
-WWDG_HandleTypeDef WWDG_Handler;     //´°¿Ú¿´ÃÅ¹·¾ä±ú
+WWDG_HandleTypeDef WWDG_Handler; // å®šä¹‰çœ‹é—¨ç‹—å¥æŸ„
 
-// ³õÊ¼»¯´°¿Ú¿´ÃÅ¹· 	
-// tr   :T[6:0],¼ÆÊıÆ÷Öµ 
-// wr   :W[6:0],´°¿ÚÖµ 
-// fprer:·ÖÆµÏµÊı£¨WDGTB£©,½ö×îµÍ2Î»ÓĞĞ§ 
-// Fwwdg=PCLK1/(4096*2^fprer). Ò»°ãPCLK1=42Mhz
-void WWDG_Init(u8 tr,u8 wr,u32 fprer)
+// åˆå§‹åŒ–çª—å£çœ‹é—¨ç‹—
+/*
+   å‚æ•°ï¼š
+   trï¼šT[6:0]ï¼Œè®¡æ•°å™¨å€¼
+   wrï¼šW[6:0]ï¼Œçª—å£å€¼
+   fpï¼šåˆ†é¢‘ç³»æ•°ï¼Œæœ€ä½2ä½æœ‰æ•ˆ
+   è®¡ç®—å…¬å¼ï¼š
+   Fwwdg = PCLK1/(4096*(2^fp)) ,å…¶ä¸­PCLK1ä¸ºæ—¶é’Ÿé¢‘ç‡ä¸€èˆ¬ä¸º42Mhz
+*/
+void WWDG_Init(uint8_t tr, uint8_t wr, uint32_t fp)
 {
-    WWDG_Handler.Instance = WWDG;               // Ñ¡ÔñWWDGÍâÉè
-    WWDG_Handler.Init.Prescaler = fprer; 	    // ÉèÖÃ·ÖÆµÏµÊı
-    WWDG_Handler.Init.Window = wr;       	    // ÉèÖÃ´°¿ÚÖµ
-    WWDG_Handler.Init.Counter = tr;     	    // ÉèÖÃ¼ÆÊıÆ÷Öµ
-	WWDG_Handler.Init.EWIMode = WWDG_EWI_ENABLE;// Ê¹ÄÜÌáÇ°»½ĞÑÖĞ¶Ï
-    HAL_WWDG_Init(&WWDG_Handler);      			// ³õÊ¼»¯WWDG
+    WWDG_Handler.Instance = WWDG; // é€‰æ‹©çœ‹é—¨ç‹—å¤–è®¾
+    WWDG_Handler.Init.Prescaler = fp; // è®¾ç½®åˆ†é¢‘ç³»æ•°
+    WWDG_Handler.Init.Window = wr; // è®¾ç½®çª—å£å€¼
+    WWDG_Handler.Init.Counter = tr; // è®¾ç½®è®¡æ•°å™¨å€¼
+    WWDG_Handler.Init.EWIMode = WWDG_EWI_ENABLE; // ä½¿èƒ½æå‰å”¤é†’æ¨¡å¼
+    HAL_WWDG_Init(&WWDG_Handler); // åˆå§‹åŒ–çœ‹é—¨ç‹—
 }
 
-// WWDGµ×²ãÇı¶¯£¬Ê±ÖÓÅäÖÃ£¬ÖĞ¶ÏÅäÖÃ
-// ´Ëº¯Êı»á±»HAL_WWDG_Init()µ÷ÓÃ
-// hwwdg:´°¿Ú¿´ÃÅ¹·¾ä±ú
+// æ­¤å‡½æ•°ä¼šè¢«WWDG_Init()è°ƒç”¨
 void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
-{   
-    __HAL_RCC_WWDG_CLK_ENABLE();         // Ê¹ÄÜ´°¿Ú¿´ÃÅ¹·Ê±ÖÓ
-    // NVICÖĞ¶ÏÉèÖÃ
-    HAL_NVIC_SetPriority(WWDG_IRQn,2,3); // ÇÀÕ¼ÓÅÏÈ¼¶2£¬×ÓÓÅÏÈ¼¶Îª3
-    HAL_NVIC_EnableIRQ(WWDG_IRQn);       // Ê¹ÄÜ´°¿Ú¿´ÃÅ¹·ÖĞ¶Ï
+{
+    __HAL_RCC_WWDG_CLK_ENABLE(); // ä½¿èƒ½çœ‹é—¨ç‹—æ—¶é’Ÿ
+    HAL_NVIC_SetPriority(WWDG_IRQn, 2, 3); // è®¾ç½®çœ‹é—¨ç‹—ä¸­æ–­ä¼˜å…ˆçº§
+    HAL_NVIC_EnableIRQ(WWDG_IRQn); // ä½¿èƒ½çœ‹é—¨ç‹—ä¸­æ–­
 }
 
-// ´°¿Ú¿´ÃÅ¹·ÖĞ¶Ï·şÎñº¯Êı
+// çœ‹é—¨ç‹—ä¸­æ–­æœåŠ¡å‡½æ•°
 void WWDG_IRQHandler(void)
 {
-    HAL_WWDG_IRQHandler(&WWDG_Handler); // µ÷ÓÃWWDG¹²ÓÃÖĞ¶Ï´¦Àíº¯Êı
+    HAL_WWDG_IRQHandler(&WWDG_Handler); // è°ƒç”¨WWDGå…±ç”¨ä¸­æ–­å¤„ç†å‡½æ•°
 }
 
-// ÖĞ¶Ï·şÎñº¯Êı´¦Àí¹ı³Ì
-// ´Ëº¯Êı»á±»HAL_WWDG_IRQHandler()µ÷ÓÃ
-void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef* hwwdg)
+// æ­¤å‡½æ•°ä¼šè¢«HAL_WWDG_IRQHandlerè°ƒç”¨
+void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg)
 {
-    HAL_WWDG_Refresh(&WWDG_Handler); // ¸üĞÂ´°¿Ú¿´ÃÅ¹·Öµ
-    LED1 = !LED1; 
+    HAL_WWDG_Refresh(hwwdg); // åˆ·æ–°çœ‹é—¨ç‹—è®¡æ•°å™¨
+    LED1 = !LED1;
 }

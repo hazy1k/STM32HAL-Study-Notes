@@ -5,11 +5,7 @@
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [
-      {
-        "path": "../readme.txt"
-      }
-    ],
+    "files": [],
     "folders": [
       {
         "name": "USER",
@@ -93,6 +89,9 @@
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_dma_ex.c"
           },
           {
+            "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_iwdg.c"
+          },
+          {
             "path": "../HALLIB/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_wwdg.c"
           }
         ],
@@ -139,7 +138,7 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "36869d9fa6e8172ab63a7f8772796abf"
+    "uid": "dc98490d02e07257d96e9a689a247f98"
   },
   "targets": {
     "WWDG": {
@@ -284,7 +283,6 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/WWDG",
-          ".cmsis/include",
           "RTE/_WWDG"
         ],
         "libList": [],
