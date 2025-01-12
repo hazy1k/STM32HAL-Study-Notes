@@ -12,42 +12,52 @@
 
 ## 2. 软件设计
 
-### 2.1 看门狗初始化函数
+### 2.1 编程大纲
+
+1. 看门狗初始化
+
+2. 看门狗配置和中断
+
+3. 中断服务函数
+
+### 2.2 代码分析
+
+#### 2.2.1 看门狗初始化函数
 
 ```c
-void WWDG_Init(u8 tr,u8 wr,u32 fprer)
+// 初始化窗口看门狗
+/*
+   参数：
+   tr：T[6:0]，计数器值
+   wr：W[6:0]，窗口值
+   fp：分频系数，最低2位有效
+   计算公式：
+   Fwwdg = PCLK1/(4096*(2^fp)) ,其中PCLK1为时钟频率一般为42Mhz
+*/
+void WWDG_Init(uint8_t tr, uint8_t wr, uint32_t fp)
 {
-    WWDG_Handler.Instance = WWDG;               // 选择WWDG外设
-    WWDG_Handler.Init.Prescaler = fprer;        // 设置分频系数
-    WWDG_Handler.Init.Window = wr;              // 设置窗口值
-    WWDG_Handler.Init.Counter = tr;             // 设置计数器值
-    WWDG_Handler.Init.EWIMode = WWDG_EWI_ENABLE;// 使能提前唤醒中断
-    HAL_WWDG_Init(&WWDG_Handler);               // 初始化WWDG
+    WWDG_Handler.Instance = WWDG; // 选择看门狗外设
+    WWDG_Handler.Init.Prescaler = fp; // 设置分频系数
+    WWDG_Handler.Init.Window = wr; // 设置窗口值
+    WWDG_Handler.Init.Counter = tr; // 设置计数器值
+    WWDG_Handler.Init.EWIMode = WWDG_EWI_ENABLE; // 使能提前唤醒模式
+    HAL_WWDG_Init(&WWDG_Handler); // 初始化看门狗
 }
 ```
 
 1. **`u8 tr`**: 计数器初值。WWDG计数器的起始值，值越大，看门狗重置的时间越长。
 2. **`u8 wr`**: 窗口值。WWDG的窗口值，必须大于计数器值，用于监控计数器是否在规定范围内，以避免重置。
-3. **`u32 fprer`**: 分频系数。决定WWDG计数器的时钟频率。通常是一个预分频值，用于调整计数器的计数频率。
-
-**代码功能**:
-
-- `WWDG_Handler.Instance = WWDG;` 选择使用WWDG外设。
-- `WWDG_Handler.Init.Prescaler = fprer;` 设置分频系数。
-- `WWDG_Handler.Init.Window = wr;` 设置窗口值。
-- `WWDG_Handler.Init.Counter = tr;` 设置计数器初值。
-- `WWDG_Handler.Init.EWIMode = WWDG_EWI_ENABLE;` 使能提前唤醒中断。
-- `HAL_WWDG_Init(&WWDG_Handler);` 调用初始化函数配置WWDG。
+3. **`u32 fp`**: 分频系数。决定WWDG计数器的时钟频率。通常是一个预分频值，用于调整计数器的计数频率。
 
 ### 2.2 看门狗时钟及中断配置
 
 ```c
+// 此函数会被WWDG_Init()调用
 void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
-{   
-    __HAL_RCC_WWDG_CLK_ENABLE();         // 使能窗口看门狗时钟
-    // NVIC中断设置
-    HAL_NVIC_SetPriority(WWDG_IRQn,2,3); // 抢占优先级2，子优先级为3
-    HAL_NVIC_EnableIRQ(WWDG_IRQn);       // 使能窗口看门狗中断
+{
+    __HAL_RCC_WWDG_CLK_ENABLE(); // 使能看门狗时钟
+    HAL_NVIC_SetPriority(WWDG_IRQn, 2, 3); // 设置看门狗中断优先级
+    HAL_NVIC_EnableIRQ(WWDG_IRQn); // 使能看门狗中断
 }
 ```
 
@@ -60,20 +70,17 @@ void HAL_WWDG_MspInit(WWDG_HandleTypeDef *hwwdg)
 ### 2.3 窗口看门狗中断服务函数
 
 ```c
-// 窗口看门狗中断服务函数
+// 看门狗中断服务函数
 void WWDG_IRQHandler(void)
 {
     HAL_WWDG_IRQHandler(&WWDG_Handler); // 调用WWDG共用中断处理函数
 }
-```
 
-```c
-// 中断服务函数处理过程
-// 此函数会被HAL_WWDG_IRQHandler()调用
-void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef* hwwdg)
+// 此函数会被HAL_WWDG_IRQHandler调用
+void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg)
 {
-    HAL_WWDG_Refresh(&WWDG_Handler); // 更新窗口看门狗值
-    LED1 = !LED1; 
+    HAL_WWDG_Refresh(hwwdg); // 刷新看门狗计数器
+    LED1 = !LED1;
 }
 ```
 
@@ -82,23 +89,30 @@ void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef* hwwdg)
 ```c
 int main(void)
 {
-  HAL_Init();                   // 初始化HAL库    
-  Stm32_Clock_Init(336,8,2,7);  // 设置时钟,168Mhz
-  delay_init(168);              // 初始化延时函数
-  uart_init(115200);            // 初始化USART
-  LED_Init();                   // 初始化LED    
-  KEY_Init();                   // 初始化按键
-  LED0 = 0;                     // 点亮LED0
-  delay_ms(300);                // 延时300ms再初始化看门狗,LED0的变化"可见"
-  WWDG_Init(0X7F,0X5F,WWDG_PRESCALER_8); // 计数器值为7F，窗口寄存器为5F，分频数为8
-  while(1)
-  {    
-      LED0 = 1; // 熄灭DS0 
-  }
+	HAL_Init();
+	Stm32_Clock_Init(336,8,2,7);
+	delay_init(168);
+	uart_init(115200);
+	KEY_Init();
+	LED_Init();
+
+	LED0_ON();
+	delay_ms(300); // 延时300ms再启动看门狗
+
+	// 窗口看门狗计算公式
+	/*
+		Fwwdg = PCLK1/(4096*(2^fp)) ,其中PCLK1为时钟频率一般为42Mhz
+		函数参数：计数值、窗口值、分频系数
+	*/
+	WWDG_Init(0x7F, 0x5F, WWDG_PRESCALER_8); // 42Mhz/(4096*(2^8))=40Hz, 窗口值=0x5F, 计数值=0x7F
+	while(1)
+	{
+		LED0_OFF();
+	}
 }
 ```
 
-该函数通过 LED0(DS0)来指示是否正在初始化。而 LED1(DS1)用来指示是否发生了中断。我们先让 LED0 亮 300ms，然后关闭以用于判断是否有复位发生了。在初始化 WWDG 之后，我们回到死循环，关闭 LED1，并等待看门狗中断的触发/复位。
+该函数通过 LED0来指示是否正在初始化。而 LED1(DS1)用来指示是否发生了中断。我们先让 LED0 亮 300ms，然后关闭以用于判断是否有复位发生了。在初始化 WWDG 之后，我们回到死循环，关闭 LED1，并等待看门狗中断的触发/复位。
 
 ## 3. 小结
 
@@ -124,7 +138,6 @@ int main(void)
 
 ```c
 #include "main.h"
-
 // 初始化WWDG
 void WWDG_Init(void) {
     // 启用WWDG时钟
@@ -135,20 +148,17 @@ void WWDG_Init(void) {
     hwwdg.Init.Prescaler = WWDG_PRESCALER_8;     // 设置预分频器
     hwwdg.Init.Window = 64;                      // 设置窗口大小
     hwwdg.Init.Counter = 127;                    // 设置计数器初始值
-
     if (HAL_WWDG_Init(&hwwdg) != HAL_OK) 
     {
         // 初始化错误处理
         Error_Handler();
     }
 }
-
 // 重载WWDG计数器
 void WWDG_Refresh(void) 
 {
     HAL_WWDG_Refresh(&hwwdg);
 }
-
 // 主函数
 int main(void) {
     // 初始化HAL库
@@ -168,7 +178,6 @@ int main(void) {
         HAL_Delay(100); // 根据需求调整延迟
     }
 }
-
 // 错误处理函数
 void Error_Handler(void) 
 {
@@ -181,19 +190,19 @@ void Error_Handler(void)
 
 ## 4. 独立与窗口看门狗同时工作
 
-### 实验目标
+### 4.1 实验目标
 
 1. 使用独立看门狗监控系统的总体健康状况。
 2. 使用窗口看门狗监控关键任务的执行时间。
 3. 在窗口看门狗即将超时前触发中断，并在中断服务程序中执行特定逻辑。
 
-### 硬件需求
+### 4.2 硬件需求
 
 - STM32微控制器开发板
 - LED（用于指示状态）
 - 按钮（用于模拟故障）
 
-### 实验步骤
+### 4.3 实验步骤
 
 1. **初始化看门狗**:
    
@@ -210,7 +219,7 @@ void Error_Handler(void)
    
    - 在窗口看门狗中断中，执行恢复操作，如重启某个任务或记录错误。
 
-### 代码示例
+### 4.4 代码示例
 
 以下是一个基于STM32 HAL库的代码示例：
 
@@ -282,16 +291,14 @@ static void MX_GPIO_Init(void)
 {
     __HAL_RCC_GPIOA_CLK_ENABLE();
     __HAL_RCC_GPIOC_CLK_ENABLE();
-    
     GPIO_InitTypeDef GPIO_InitStruct = {0};
-    
     // LED引脚配置
     GPIO_InitStruct.Pin = LED_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-    
+
     // 按钮引脚配置
     GPIO_InitStruct.Pin = BUTTON_PIN;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -303,9 +310,10 @@ void SystemClock_Config(void)
 {
     // 系统时钟配置代码
 }
-
 ```
 
 ---
 
 2024.9.30 第一次修订，后期不再维护
+
+2025.1.12 修补内容，优化代码
