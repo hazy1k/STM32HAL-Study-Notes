@@ -1,11 +1,15 @@
 {
-  "name": "TIMER",
+  "name": "TIM",
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [],
+    "files": [
+      {
+        "path": "../readme.txt"
+      }
+    ],
     "folders": [
       {
         "name": "USER",
@@ -138,10 +142,10 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "e9c6cbf7a131dce08b60853c66062e28"
+    "uid": "1b0c3f9891bf46ac0b564b498b557810"
   },
   "targets": {
-    "TIMER": {
+    "TIM": {
       "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
@@ -283,7 +287,8 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/TIMER",
-          "RTE/_TIMER"
+          ".cmsis/include",
+          "RTE/_TIM"
         ],
         "libList": [],
         "defineList": [

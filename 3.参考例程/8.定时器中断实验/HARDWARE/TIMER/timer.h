@@ -1,9 +1,11 @@
-#ifndef _TIMER_H
-#define _TIMER_H
+#ifndef __TIMER_H
+#define __TIMER_H
+
 #include "sys.h"
 
-extern TIM_HandleTypeDef TIM3_Handler;      //¶¨Ê±Æ÷¾ä±ú 
+#define TIMx TIM3
+#define TIM_IRQn TIM3_IRQn
 
-void TIM3_Init(u16 arr,u16 psc);
+void TIM_Config(uint16_t arr, uint16_t psc);
 
-#endif
+#endif /* __TIMER_H */
