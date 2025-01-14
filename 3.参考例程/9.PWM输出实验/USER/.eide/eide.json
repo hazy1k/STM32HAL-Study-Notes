@@ -5,11 +5,7 @@
   "srcDirs": [],
   "virtualFolder": {
     "name": "<virtual_root>",
-    "files": [
-      {
-        "path": "../readme.txt"
-      }
-    ],
+    "files": [],
     "folders": [
       {
         "name": "USER",
@@ -133,7 +129,11 @@
       },
       {
         "name": "README",
-        "files": [],
+        "files": [
+          {
+            "path": "../readme.txt"
+          }
+        ],
         "folders": []
       }
     ]
@@ -142,7 +142,7 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "d829a105176cda7d51d0ee7243e1e26e"
+    "uid": "6092e294144490a06e031d910d1af1a6"
   },
   "targets": {
     "PWM": {
