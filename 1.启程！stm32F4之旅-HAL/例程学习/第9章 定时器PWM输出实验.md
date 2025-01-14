@@ -12,175 +12,111 @@
 
 ## 2. 软件设计
 
-### 2.1 TIM14 PWM模式初始化
+### 2.1 编程大纲
+
+1. 定时器TIM14初始化
+
+2. 配置TIM14_CH1为PWM1模式
+
+3. 编写占空比函数
+
+4. 主函数测试（通过改变占空比实现呼吸灯）
+
+### 2.2 代码分析
+
+#### 2.2.1 TIM14_CH1配置PWM模式
 
 ```c
-// TIM14 PWM部分初始化 
-// arr：自动重装值。
-// psc：时钟预分频数
-// 定时器溢出时间计算方法:Tout=((arr+1)*(psc+1))/Ft us.
-// Ft=定时器工作频率,单位:Mhz
+TIM_HandleTypeDef TIM14_Handler; // 定时器TIM14句柄
+TIM_OC_InitTypeDef TIM14_CH1Handler; // 定时器TIM14通道1句柄
+
+// TIM14 PWM初始化 
 void TIM14_PWM_Init(u16 arr, u16 psc)
 {  
-    TIM14_Handler.Instance = TIM14;                 // 定时器14
-    TIM14_Handler.Init.Prescaler = psc;            // 定时器分频
-    TIM14_Handler.Init.CounterMode = TIM_COUNTERMODE_UP;// 向上计数模式
-    TIM14_Handler.Init.Period = arr;               // 自动重装载值
+    TIM14_Handler.Instance = TIM14;          	   
+    TIM14_Handler.Init.Prescaler = psc;            
+    TIM14_Handler.Init.CounterMode = TIM_COUNTERMODE_UP;
+    TIM14_Handler.Init.Period = arr;               
     TIM14_Handler.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-    HAL_TIM_PWM_Init(&TIM14_Handler); // 初始化PWM
-
-    TIM14_CH1Handler.OCMode = TIM_OCMODE_PWM1; // 模式选择PWM1
-    TIM14_CH1Handler.Pulse = arr/2;            // 设置比较值,此值用来确定占空比，默认比较值为自动重装载值的一半,即占空比为50%
+    HAL_TIM_PWM_Init(&TIM14_Handler); 
+    TIM14_CH1Handler.OCMode=TIM_OCMODE_PWM1; // 模式选择PWM1
+    TIM14_CH1Handler.Pulse = arr/2;          // 设置比较值,此值用来确定占空比，默认比较值为自动重装载值的一半,即占空比为50%
     TIM14_CH1Handler.OCPolarity = TIM_OCPOLARITY_LOW; // 输出比较极性为低 
     HAL_TIM_PWM_ConfigChannel(&TIM14_Handler,&TIM14_CH1Handler,TIM_CHANNEL_1); // 配置TIM14通道1
     HAL_TIM_PWM_Start(&TIM14_Handler,TIM_CHANNEL_1); // 开启PWM通道1
 }
-```
 
-#### 函数定义
-
-```c
-void TIM14_PWM_Init(u16 arr, u16 psc)
-```
-
-- 这是一个初始化 TIM14 的 PWM 输出的函数。它接收两个参数：
-  - `arr`：自动重装载值（Auto Reload Register），决定 PWM 的频率。
-  - `psc`：预分频器值（Prescaler），用于调整定时器的计数频率。
-
-#### 定时器配置
-
-```c
-TIM14_Handler.Instance = TIM14; // 定时器14
-```
-
-- 设置 `TIM14_Handler` 的实例为 `TIM14`，这意味着我们将配置 TIM14 定时器。
-
-```c
-TIM14_Handler.Init.Prescaler = psc; // 定时器分频
-```
-
-- 将传入的预分频器值 `psc` 赋值给 `TIM14_Handler` 的预分频器配置，决定了定时器的输入频率。
-
-```c
-TIM14_Handler.Init.CounterMode = TIM_COUNTERMODE_UP; // 向上计数模式
-```
-
-- 设置计数模式为向上计数，表示定时器从 0 开始计数到达设定的周期。
-
-```c
-TIM14_Handler.Init.Period = arr; // 自动重装载值
-```
-
-- 将自动重装载值 `arr` 设置为定时器的周期。当计数器达到这个值时，会重置为 0，循环计数。
-
-```c
-TIM14_Handler.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-```
-
-- 设置时钟分频因子为 1，表示不进行额外的分频。
-
-```c
-HAL_TIM_PWM_Init(&TIM14_Handler); // 初始化PWM
-```
-
-- 调用 HAL 库的 `HAL_TIM_PWM_Init` 函数，完成 TIM14 的 PWM 初始化。
-
-#### PWM 通道配置
-
-```c
-TIM14_CH1Handler.OCMode = TIM_OCMODE_PWM1; // 模式选择PWM1
-```
-
-- 设置通道 1 的输出比较模式为 PWM1，这是一种常见的 PWM 输出模式。
-
-```c
-TIM14_CH1Handler.Pulse = arr / 2; // 设置比较值，此值用来确定占空比
-```
-
-- 设置 PWM 的比较值为 `arr/2`，这样可以使 PWM 的占空比为 50%。占空比是指 PWM 信号高电平时间与其周期的比值。
-
-```c
-TIM14_CH1Handler.OCPolarity = TIM_OCPOLARITY_LOW; // 输出比较极性为低 
-```
-
-- 设置输出比较的极性为低，即在比较值小于计数器值时，输出低电平。
-
-```c
-HAL_TIM_PWM_ConfigChannel(&TIM14_Handler, &TIM14_CH1Handler, TIM_CHANNEL_1); // 配置TIM14通道1
-```
-
-- 调用 HAL 库的 `HAL_TIM_PWM_ConfigChannel` 函数，配置 TIM14 的通道 1。
-
-#### 启动 PWM
-
-```c
-HAL_TIM_PWM_Start(&TIM14_Handler, TIM_CHANNEL_1); // 开启PWM通道1
-```
-
-- 调用 `HAL_TIM_PWM_Start` 函数启动 TIM14 的通道 1，使 PWM 输出开始。
-
-### 2.2 TIM14 GPIO初始化
-
-```c
 // 定时器底层驱动，时钟使能，引脚配置
 // 此函数会被HAL_TIM_PWM_Init()调用
-// htim:定时器句柄
 void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
 {
-    GPIO_InitTypeDef GPIO_Initure;
-    __HAL_RCC_TIM14_CLK_ENABLE();            // 使能定时器14
-    __HAL_RCC_GPIOF_CLK_ENABLE();            // 开启GPIOF时钟
-
-    GPIO_Initure.Pin = GPIO_PIN_9;          // PF9
-    GPIO_Initure.Mode = GPIO_MODE_AF_PP;    // 复用推挽输出
-    GPIO_Initure.Pull = GPIO_PULLUP;        // 上拉
-    GPIO_Initure.Speed = GPIO_SPEED_HIGH;   // 高速
-    GPIO_Initure.Alternate = GPIO_AF9_TIM14;// PF9复用为TIM14_CH1
-    HAL_GPIO_Init(GPIOF,&GPIO_Initure); // 初始化PF9
+	GPIO_InitTypeDef GPIO_Initure;
+	__HAL_RCC_TIM14_CLK_ENABLE();			
+	__HAL_RCC_GPIOF_CLK_ENABLE();			
+	GPIO_Initure.Pin = GPIO_PIN_9;          
+	GPIO_Initure.Mode = GPIO_MODE_AF_PP;  	
+	GPIO_Initure.Pull = GPIO_PULLUP;        
+	GPIO_Initure.Speed = GPIO_SPEED_HIGH;   
+	GPIO_Initure.Alternate = GPIO_AF9_TIM14; // PF9复用为TIM14_CH1
+	HAL_GPIO_Init(GPIOF,&GPIO_Initure);
 }
 ```
 
-### 2.3 设置占空比函数
+#### 2.2.2 设置占空比函数
 
 ```c
 // 设置TIM通道4的占空比
-// compare:比较值
 void TIM_SetTIM14Compare1(u32 compare)
 {
-    TIM14->CCR1 = compare; // 设置占空比 
+	TIM14->CCR1 = compare; // 设置占空比 
 }
 ```
 
-### 2.4 主函数
+#### 2.2.3 主函数测试
 
 ```c
+#include "sys.h"
+#include "delay.h"
+#include "usart.h"
+#include "led.h"
+#include "timer.h"
+
 int main(void)
 {
-    u8 dir = 1; // 1:递增 0:递减
-    u16 led0pwmval = 0; // LED0 PWM输出占空比值
-
-    HAL_Init();                  // 初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7); // 设置时钟,168Mhz
-    delay_init(168);             // 初始化延时函数
-    uart_init(115200);           // 初始化USART
-    LED_Init();                  // 初始化LED    
-    TIM3_Init(5000-1,8400-1);    // 定时器3初始化，周期为500ms
-    TIM14_PWM_Init(500-1,84-1);  // 84M/84=1M的计数频率，自动重装载为500，那么PWM频率为1M/500=2kHZ
-
-    while(1)
-    {
-        delay_ms(10);         
-        if(dir)
-            led0pwmval++; // dir==1 led0pwmval递增
-        else 
-            led0pwmval--; // dir==0 led0pwmval递减 
-        if(led0pwmval > 300)
-            dir=0;          // led0pwmval到达300后,方向为递减
-        if(led0pwmval == 0)
-            dir=1;          // led0pwmval递减到0后，方向改为递增
-        TIM_SetTIM14Compare1(led0pwmval); // 修改比较值，修改占空比
-    }
+	uint8_t dir = 1; // 1: 正序 0: 逆序
+	uint16_t led0_duty = 0; // LED0 PWM输出占空比 
+	HAL_Init();
+	Stm32_Clock_Init(336,8,2,7);
+	delay_init(168);
+	uart_init(115200);
+	LED_Init();
+	// Time = (500*84)/84MHz = 500ms
+	// 计数频率为84MHz/psc(84) = 1MHz
+	// PWM频率为1MHz/500 = 2KHz
+	TIM14_PWM_Init(500-1, 84-1);
+	while(1)
+	{
+		delay_ms(10);
+		if(dir)
+		{
+			led0_duty++; // 正序的时候，增加占空比
+		}
+		else
+		{
+			led0_duty--; // 逆序的时候，减少占空比
+		}
+		if(led0_duty > 300) // 占空比达到峰值，改变方向
+		{
+			dir = 0;
+		}
+		if(led0_duty == 0) // 占空比达到谷值，改变方向
+		{
+			dir = 1;
+		}
+		TIM_SetTIM14Compare1(led0_duty);
+	}
 }
+
 ```
 
 第一次接触PWM可能对这个主函数不熟悉，下面我们来解释一下：
@@ -317,3 +253,5 @@ void SystemClock_Config(void)
 ---
 
 2024.10.3 第一次修订，后期不再维护
+
+2025.1.14 简化内容，优化代码，去除原本的TIM3中断
