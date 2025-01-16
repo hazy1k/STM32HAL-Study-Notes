@@ -1,5 +1,5 @@
 {
-  "name": "ICAPTURE",
+  "name": "PWM",
   "type": "ARM",
   "dependenceList": [],
   "srcDirs": [],
@@ -129,7 +129,11 @@
       },
       {
         "name": "README",
-        "files": [],
+        "files": [
+          {
+            "path": "../readme.txt"
+          }
+        ],
         "folders": []
       }
     ]
@@ -138,10 +142,10 @@
   "deviceName": null,
   "packDir": null,
   "miscInfo": {
-    "uid": "8529fc55ce6fbf344aba906e1bdc9fd2"
+    "uid": "b98a22b86d1ff829dc625f75aa2177df"
   },
   "targets": {
-    "ICAPTURE": {
+    "PWM": {
       "excludeList": [],
       "toolchain": "AC5",
       "compileConfig": {
@@ -283,7 +287,8 @@
           "../HARDWARE/LED",
           "../HARDWARE/KEY",
           "../HARDWARE/TIMER",
-          "RTE/_ICAPTURE"
+          ".cmsis/include",
+          "RTE/_PWM"
         ],
         "libList": [],
         "defineList": [

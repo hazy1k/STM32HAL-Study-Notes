@@ -15,6 +15,6 @@
 
 version: "2.0"
 options:
-    ICAPTURE:
+    PWM:
         files: {}
         virtualPathFiles: {}
