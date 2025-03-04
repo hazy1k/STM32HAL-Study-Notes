@@ -8,13 +8,12 @@
 int main(void)
 {
 	u8 t=0; 
-    HAL_Init();                   	//初始化HAL库    
-    Stm32_Clock_Init(336,8,2,7);  	//设置时钟,168Mhz
-	delay_init(168);               	//初始化延时函数
-	uart_init(115200);             	//初始化USART
-	LED_Init();						//初始化LED	
-	TPAD_Init(8);                   //初始化触摸按键
-	
+    HAL_Init();                   	
+    Stm32_Clock_Init(336,8,2,7);  	
+	delay_init(168);               	
+	uart_init(115200);            
+	LED_Init();						
+	tpad_init(8); 
    	while(1)
 	{					  						  		 
  		if(TPAD_Scan(0)) // 成功捕获到了一次上升沿(此函数执行时间至少15ms)
