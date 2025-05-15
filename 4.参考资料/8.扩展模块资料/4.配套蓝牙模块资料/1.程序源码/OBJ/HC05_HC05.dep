@@ -1,170 +1,0 @@
-Dependencies for Project 'HC05', Target 'HC05': (DO NOT MODIFY !)
-F (.\main.c)(0x5ED5B15F)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
-I (..\HARDWARE\LED\led.h)(0x50513ABC)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\HARDWARE\KEY\key.h)(0x550A8567)
-I (..\HARDWARE\LCD\lcd.h)(0x5539BD28)
-I (d:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C245B8)
-I (..\SYSTEM\usart\usart.h)(0x50517A82)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-I (..\HARDWARE\HC05\hc05.h)(0x554197C0)
-I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
-I (..\USMART\usmart.h)(0x5501A38D)
-I (..\USMART\usmart_str.h)(0x5501A38D)
-F (.\stm32f10x_it.c)(0x4EBEACB0)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_it.o --omf_browse ..\obj\stm32f10x_it.crf --depend ..\obj\stm32f10x_it.d)
-I (stm32f10x_it.h)(0x4D99A426)
-I (stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (stm32f10x_conf.h)(0x53C5F836)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-F (.\system_stm32f10x.c)(0x4D99A426)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\system_stm32f10x.o --omf_browse ..\obj\system_stm32f10x.crf --depend ..\obj\system_stm32f10x.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (stm32f10x_conf.h)(0x53C5F836)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-F (..\HARDWARE\LED\led.c)(0x5540DA75)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\led.o --omf_browse ..\obj\led.crf --depend ..\obj\led.d)
-I (..\HARDWARE\LED\led.h)(0x50513ABC)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\HARDWARE\KEY\key.c)(0x5540DA80)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\key.o --omf_browse ..\obj\key.crf --depend ..\obj\key.d)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\HARDWARE\KEY\key.h)(0x550A8567)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-F (..\HARDWARE\LCD\lcd.c)(0x5540DA8B)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\lcd.o --omf_browse ..\obj\lcd.crf --depend ..\obj\lcd.d)
-I (..\HARDWARE\LCD\lcd.h)(0x5539BD28)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (d:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C245B8)
-I (..\HARDWARE\LCD\font.h)(0x550289B7)
-I (..\SYSTEM\usart\usart.h)(0x50517A82)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-F (..\HARDWARE\TIMER\timer.c)(0x554197E8)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\timer.o --omf_browse ..\obj\timer.crf --depend ..\obj\timer.d)
-I (..\HARDWARE\TIMER\timer.h)(0x5451C491)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\HARDWARE\LED\led.h)(0x50513ABC)
-F (..\HARDWARE\USART3\usart3.c)(0x554197D3)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usart3.o --omf_browse ..\obj\usart3.crf --depend ..\obj\usart3.d)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (d:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x54C245B8)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
-I (..\HARDWARE\TIMER\timer.h)(0x5451C491)
-F (..\HARDWARE\HC05\hc05.c)(0x5ED5B5C7)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\hc05.o --omf_browse ..\obj\hc05.crf --depend ..\obj\hc05.d)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\SYSTEM\usart\usart.h)(0x50517A82)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-I (..\HARDWARE\HC05\hc05.h)(0x554197C0)
-I (..\HARDWARE\LED\led.h)(0x50513ABC)
-I (d:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C245B8)
-I (d:\Keil_v5\ARM\ARMCC\include\math.h)(0x54C245B8)
-F (..\SYSTEM\delay\delay.c)(0x555AC82A)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\SYSTEM\sys\sys.c)(0x55018498)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\sys.o --omf_browse ..\obj\sys.crf --depend ..\obj\sys.d)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\SYSTEM\usart\usart.c)(0x550F9663)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usart.o --omf_browse ..\obj\usart.crf --depend ..\obj\usart.d)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\SYSTEM\usart\usart.h)(0x50517A82)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-F (..\CORE\core_cm3.c)(0x4C0C587E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\core_cm3.o --omf_browse ..\obj\core_cm3.crf --depend ..\obj\core_cm3.d)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-F (..\CORE\startup_stm32f10x_hd.s)(0x4D783CDE)(--cpu Cortex-M3 -g --apcs=interwork -I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 515" --pd "STM32F10X_HD SETA 1"--list .\startup_stm32f10x_hd.lst --xref -o ..\obj\startup_stm32f10x_hd.o --depend ..\obj\startup_stm32f10x_hd.d)
-F (..\STM32F10x_FWLib\src\misc.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\misc.o --omf_browse ..\obj\misc.crf --depend ..\obj\misc.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_fsmc.c)(0x5039863E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_fsmc.o --omf_browse ..\obj\stm32f10x_fsmc.crf --depend ..\obj\stm32f10x_fsmc.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_gpio.c)(0x4D79EEC6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_gpio.o --omf_browse ..\obj\stm32f10x_gpio.crf --depend ..\obj\stm32f10x_gpio.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_rcc.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_rcc.o --omf_browse ..\obj\stm32f10x_rcc.crf --depend ..\obj\stm32f10x_rcc.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_usart.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_usart.o --omf_browse ..\obj\stm32f10x_usart.crf --depend ..\obj\stm32f10x_usart.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_tim.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_tim.o --omf_browse ..\obj\stm32f10x_tim.crf --depend ..\obj\stm32f10x_tim.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\STM32F10x_FWLib\src\stm32f10x_dma.c)(0x4D783BB4)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\stm32f10x_dma.o --omf_browse ..\obj\stm32f10x_dma.crf --depend ..\obj\stm32f10x_dma.d)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-F (..\USMART\usmart.c)(0x5501A38D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usmart.o --omf_browse ..\obj\usmart.crf --depend ..\obj\usmart.d)
-I (..\USMART\usmart.h)(0x5501A38D)
-I (..\USMART\usmart_str.h)(0x5501A38D)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\SYSTEM\usart\usart.h)(0x50517A82)
-I (d:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x54C245B8)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-F (..\USMART\usmart_config.c)(0x5540DCBB)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usmart_config.o --omf_browse ..\obj\usmart_config.crf --depend ..\obj\usmart_config.d)
-I (..\USMART\usmart.h)(0x5501A38D)
-I (..\USMART\usmart_str.h)(0x5501A38D)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\SYSTEM\delay\delay.h)(0x555AC82B)
-I (..\SYSTEM\sys\sys.h)(0x550F951B)
-I (..\HARDWARE\LCD\lcd.h)(0x5539BD28)
-I (d:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C245B8)
-I (..\HARDWARE\HC05\hc05.h)(0x554197C0)
-F (..\USMART\usmart_str.c)(0x5501A38D)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork -I..\HARDWARE\LED -I..\SYSTEM\delay -I..\SYSTEM\sys -I..\SYSTEM\usart -I..\USER -I..\STM32F10x_FWLib\inc -I..\CORE -I..\HARDWARE\KEY -I..\HARDWARE\LCD -I..\HARDWARE\HC05 -I..\HARDWARE\TIMER -I..\HARDWARE\USART3 -I..\USMART-I "E:\BaiduNetdiskDownload\01.正点原子开发板\【正点原子】战舰STM32F103开发板资料 资料盘(A盘)\9，增值资料\1，ALIENTEK 产品资料\1，ATK-HC05蓝牙串口模块\2，程序源码\（库函数版本，适合战舰V3和精英STM32开发板）扩展实验1 ATK-HC05蓝牙串口模块实验\USER\RTE"-I d:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.2.0\Device\Include-I d:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32F10X_HD -DSTM32F10X_HD -DUSE_STDPERIPH_DRIVER-o ..\obj\usmart_str.o --omf_browse ..\obj\usmart_str.crf --depend ..\obj\usmart_str.d)
-I (..\USMART\usmart_str.h)(0x5501A38D)
-I (..\USER\stm32f10x.h)(0x4D783CB4)
-I (..\CORE\core_cm3.h)(0x4D523B58)
-I (d:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C245B8)
-I (..\USER\stm32f10x_conf.h)(0x53C5F836)
-I (..\USMART\usmart.h)(0x5501A38D)
-F (..\README.TXT)(0x55486056)()
