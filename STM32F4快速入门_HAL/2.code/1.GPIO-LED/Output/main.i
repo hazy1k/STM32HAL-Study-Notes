@@ -8635,7 +8635,7 @@ void delay_us(uint32_t nus);
 # 8 "../User/BSP\\bsp_init.h" 2
 
 # 1 "../User/BSP/led\\led.h" 1
-# 15 "../User/BSP/led\\led.h"
+# 16 "../User/BSP/led\\led.h"
 void bsp_led_init(void);
 # 10 "../User/BSP\\bsp_init.h" 2
 
@@ -8647,13 +8647,8 @@ int main(void)
     bsp_init();
     while(1)
     {
-        HAL_GPIO_WritePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0200), GPIO_PIN_RESET);
-        delay_ms(500);
-        HAL_GPIO_WritePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0200), GPIO_PIN_SET);
-        delay_ms(500);
-        HAL_GPIO_WritePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0400), GPIO_PIN_RESET);
-        delay_ms(500);
-        HAL_GPIO_WritePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0400), GPIO_PIN_SET);
+        HAL_GPIO_TogglePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0200));
+        HAL_GPIO_TogglePin(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), ((uint16_t)0x0400));
         delay_ms(500);
     }
 }
