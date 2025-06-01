@@ -353,5 +353,3 @@ HAL_NVIC_EnableIRQ(EXTI0_IRQn);
 5. **编写中断服务函数 (ISR):** 如上所述，在 `stm32f4xx_it.c` 中实现对应的 `EXTIx_IRQHandler` 函数，并在其中调用 `HAL_GPIO_EXTI_IRQHandler(GPIO_Pin)`。
 
 6. **实现回调函数:** 在你的用户代码中 (如 `main.c`) **重新实现** `HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)` 函数，并在其中根据 `GPIO_Pin` 参数编写具体的中断处理逻辑。
-
-
