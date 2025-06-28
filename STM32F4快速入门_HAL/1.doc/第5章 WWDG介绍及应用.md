@@ -100,7 +100,6 @@ int main(void)
         LED_OFF(LED1_GPIO_Pin);
     }
 }
-
 ```
 
 ## 4. WWDG常见函数（HAL库）
@@ -209,7 +208,3 @@ void HAL_WWDG_EarlyWakeupCallback(WWDG_HandleTypeDef *hwwdg) {
   - 此处是 **唯一安全的喂狗时机**（计数器=0x40），错过将导致复位。
   
   - 避免执行耗时操作（如 `HAL_Delay`），否则可能无法及时喂狗。
-
-
-
-
