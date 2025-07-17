@@ -1,0 +1,3 @@
+### STM32F4_Quick_Start_Guide_HAL和STM32F4快速入门_HAL中的内容完全一样，用全英文是为了在VScode中使用STLink下载程序和调试，要求使用全英文路径，不然会识别不到.HEX文件
+
+
