@@ -258,7 +258,7 @@
       },
       "uploader": "STLink",
       "uploadConfig": {
-        "bin": "",
+        "bin": "Template.hex",
         "proType": "SWD",
         "resetMode": "default",
         "runAfterProgram": true,

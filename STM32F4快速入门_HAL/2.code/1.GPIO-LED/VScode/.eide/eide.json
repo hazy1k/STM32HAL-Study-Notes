@@ -247,21 +247,34 @@
             }
           ]
         },
-        "options": "null"
+        "options": "null",
+        "archExtensions": ""
       },
-      "uploader": "JLink",
+      "uploader": "STLink",
       "uploadConfig": {
-        "bin": "",
-        "baseAddr": "",
-        "cpuInfo": {
-          "vendor": "null",
-          "cpuName": "null"
-        },
-        "proType": 1,
-        "speed": 8000,
+        "bin": "STM32F4.hex",
+        "proType": "SWD",
+        "resetMode": "default",
+        "runAfterProgram": true,
+        "speed": 4000,
+        "address": "0x8000000",
+        "elFile": "None",
+        "optionBytes": ".eide/template.st.option.bytes.ini",
         "otherCmds": ""
       },
-      "uploadConfigMap": {},
+      "uploadConfigMap": {
+        "JLink": {
+          "bin": "",
+          "baseAddr": "",
+          "cpuInfo": {
+            "vendor": "null",
+            "cpuName": "null"
+          },
+          "proType": 1,
+          "speed": 8000,
+          "otherCmds": ""
+        }
+      },
       "custom_dep": {
         "name": "default",
         "incList": [
@@ -316,5 +329,5 @@
       }
     }
   },
-  "version": "3.5"
+  "version": "3.6"
 }
