@@ -8656,8 +8656,9 @@ uint8_t key_scan(uint8_t mode);
 
 
 
-void ATIM_PWM_Init(uint16_t arr, uint16_t psc);
-void ATIM_PWM_SetDeadZone(uint16_t ccr, uint8_t dtg);
+void tim8_pwmin_init(void);
+void restart_pwmin_capture(void);
+void tim14_pwmout_init(uint16_t arr, uint16_t psc);
 # 12 "../User/BSP\\bsp_init.h" 2
 
 void bsp_init(void);
