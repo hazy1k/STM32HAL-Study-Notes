@@ -1,0 +1,8 @@
+CompileFlags:
+    Add:
+        - -Ie:\dianzi\MDKv5\ARM\ARMCLANG/include
+        - -Ie:\dianzi\MDKv5\ARM\ARMCLANG/include/libcxx
+    Remove:
+        - -f*
+    CompilationDatabase: ./build/Template
+    Compiler: e:\dianzi\MDKv5\ARM\ARMCLANG\bin\armclang.exe

@@ -2,6 +2,10 @@
     "folders": [
         {
             "path": "."
+        },
+        {
+            "name": "111",
+            "path": "C:/Users/qiu/Documents/PlatformIO/Projects/111"
         }
     ],
     "settings": {
