@@ -66,5 +66,4 @@
   ..\Libraries\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h \
   ..\Libraries\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h \
   ..\Libraries\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h \
-  ..\Libraries\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h \
-  E:\dianzi\MDKv5\ARM\ARMCLANG\Bin\..\include\stdio.h
+  ..\Libraries\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h

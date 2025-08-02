@@ -5,7 +5,6 @@
 # 1 "<command line>" 1
 # 1 "<built-in>" 2
 # 1 "../User/BSP/atim/atim.c" 2
-# 12 "../User/BSP/atim/atim.c"
 # 1 "../User/BSP/atim\\atim.h" 1
 
 
@@ -8298,492 +8297,211 @@ void sys_intx_enable(void);
 void sys_msr_msp(uint32_t addr);
 # 5 "../User/BSP/atim\\atim.h" 2
 
-void ATIM_PWM_Init(uint16_t arr, uint16_t psc);
-void ATIM_PWM_SetDeadZone(uint16_t ccr, uint8_t dtg);
-# 13 "../User/BSP/atim/atim.c" 2
-# 1 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 1 3
-# 68 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-    typedef __builtin_va_list __va_list;
-# 87 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-typedef struct __fpos_t_struct {
-    unsigned long long int __pos;
+void tim8_pwmin_init(void);
+void restart_pwmin_capture(void);
+void tim14_pwmout_init(uint16_t arr, uint16_t psc);
+# 2 "../User/BSP/atim/atim.c" 2
 
+TIM_HandleTypeDef g_tim8_pwmin_handle;
 
 
+uint8_t PWMIN_STA = 0;
+uint16_t PWMIN_PSC = 0;
+uint32_t PWMIN_Highvlaue = 0;
+uint32_t PWMIN_CycleTime = 0;
 
 
-    struct {
-        unsigned int __state1, __state2;
-    } __mbstate;
-} fpos_t;
-# 108 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-typedef struct __FILE FILE;
-# 119 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-struct __FILE {
-    union {
-        long __FILE_alignment;
-
-
-
-        char __FILE_size[84];
-
-    } __FILE_opaque;
-};
-# 138 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern FILE __stdin, __stdout, __stderr;
-extern FILE *__aeabi_stdin, *__aeabi_stdout, *__aeabi_stderr;
-# 224 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int remove(const char * ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int rename(const char * , const char * ) __attribute__((__nonnull__(1,2)));
-# 243 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) FILE *tmpfile(void);
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) char *tmpnam(char * );
-# 265 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fclose(FILE * ) __attribute__((__nonnull__(1)));
-# 275 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fflush(FILE * );
-# 285 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) FILE *fopen(const char * __restrict ,
-                           const char * __restrict ) __attribute__((__nonnull__(1,2)));
-# 329 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) FILE *freopen(const char * __restrict ,
-                    const char * __restrict ,
-                    FILE * __restrict ) __attribute__((__nonnull__(2,3)));
-# 342 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) void setbuf(FILE * __restrict ,
-                    char * __restrict ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int setvbuf(FILE * __restrict ,
-                   char * __restrict ,
-                   int , size_t ) __attribute__((__nonnull__(1)));
-# 370 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int fprintf(FILE * __restrict ,
-                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 393 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int _fprintf(FILE * __restrict ,
-                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int _printf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
-
-
-
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int _sprintf(char * __restrict , const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int __ARM_snprintf(char * __restrict , size_t ,
-                     const char * __restrict , ...) __attribute__((__nonnull__(3)));
-
-
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int snprintf(char * __restrict , size_t ,
-                     const char * __restrict , ...) __attribute__((__nonnull__(3)));
-# 460 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int _snprintf(char * __restrict , size_t ,
-                      const char * __restrict , ...) __attribute__((__nonnull__(3)));
-
-
-
-
-
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int fscanf(FILE * __restrict ,
-                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 503 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int _fscanf(FILE * __restrict ,
-                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-
-
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int _scanf(const char * __restrict , ...) __attribute__((__nonnull__(1)));
-
-
-
-
-
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int sscanf(const char * __restrict ,
-                    const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-# 541 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __scanf_args
-extern __attribute__((__nothrow__)) int _sscanf(const char * __restrict ,
-                     const char * __restrict , ...) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
-extern __attribute__((__nothrow__)) int vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
-extern __attribute__((__nothrow__)) int vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
-
-extern __attribute__((__nothrow__)) int _vfscanf(FILE * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
-extern __attribute__((__nothrow__)) int _vscanf(const char * __restrict , __va_list) __attribute__((__nonnull__(1)));
-extern __attribute__((__nothrow__)) int _vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
-extern __attribute__((__nothrow__)) int __ARM_vsscanf(const char * __restrict , const char * __restrict , __va_list) __attribute__((__nonnull__(1,2)));
-
-extern __attribute__((__nothrow__)) int vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int _vprintf(const char * __restrict , __va_list ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-extern __attribute__((__nothrow__)) int vfprintf(FILE * __restrict ,
-                    const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 584 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int vsprintf(char * __restrict ,
-                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-# 594 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int __ARM_vsnprintf(char * __restrict , size_t ,
-                     const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-
-extern __attribute__((__nothrow__)) int vsnprintf(char * __restrict , size_t ,
-                     const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 609 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int _vsprintf(char * __restrict ,
-                      const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-extern __attribute__((__nothrow__)) int _vfprintf(FILE * __restrict ,
-                     const char * __restrict , __va_list ) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-extern __attribute__((__nothrow__)) int _vsnprintf(char * __restrict , size_t ,
-                      const char * __restrict , __va_list ) __attribute__((__nonnull__(3)));
-# 635 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-#pragma __printf_args
-extern __attribute__((__nothrow__)) int __ARM_asprintf(char ** , const char * __restrict , ...) __attribute__((__nonnull__(2)));
-extern __attribute__((__nothrow__)) int __ARM_vasprintf(char ** , const char * __restrict , __va_list ) __attribute__((__nonnull__(2)));
-# 649 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fgetc(FILE * ) __attribute__((__nonnull__(1)));
-# 659 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) char *fgets(char * __restrict , int ,
-                    FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 673 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fputc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 683 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fputs(const char * __restrict , FILE * __restrict ) __attribute__((__nonnull__(1,2)));
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int getc(FILE * ) __attribute__((__nonnull__(1)));
-# 704 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-    extern __attribute__((__nothrow__)) int (getchar)(void);
-# 713 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) char *gets(char * ) __attribute__((__nonnull__(1)));
-# 725 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int putc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 737 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-    extern __attribute__((__nothrow__)) int (putchar)(int );
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int puts(const char * ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int ungetc(int , FILE * ) __attribute__((__nonnull__(2)));
-# 778 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) size_t fread(void * __restrict ,
-                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 794 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) size_t __fread_bytes_avail(void * __restrict ,
-                    size_t , FILE * __restrict ) __attribute__((__nonnull__(1,3)));
-# 810 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) size_t fwrite(const void * __restrict ,
-                    size_t , size_t , FILE * __restrict ) __attribute__((__nonnull__(1,4)));
-# 822 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fgetpos(FILE * __restrict , fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 833 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fseek(FILE * , long int , int ) __attribute__((__nonnull__(1)));
-# 850 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int fsetpos(FILE * __restrict , const fpos_t * __restrict ) __attribute__((__nonnull__(1,2)));
-# 863 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) long int ftell(FILE * ) __attribute__((__nonnull__(1)));
-# 877 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) void rewind(FILE * ) __attribute__((__nonnull__(1)));
-# 886 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) void clearerr(FILE * ) __attribute__((__nonnull__(1)));
-
-
-
-
-
-
-
-extern __attribute__((__nothrow__)) int feof(FILE * ) __attribute__((__nonnull__(1)));
-
-
-
-
-extern __attribute__((__nothrow__)) int ferror(FILE * ) __attribute__((__nonnull__(1)));
-
-
-
-
-extern __attribute__((__nothrow__)) void perror(const char * );
-# 917 "E:\\dianzi\\MDKv5\\ARM\\ARMCLANG\\Bin\\..\\include\\stdio.h" 3
-extern __attribute__((__nothrow__)) int _fisatty(FILE * ) __attribute__((__nonnull__(1)));
-
-
-
-extern __attribute__((__nothrow__)) void __use_no_semihosting_swi(void);
-extern __attribute__((__nothrow__)) void __use_no_semihosting(void);
-# 14 "../User/BSP/atim/atim.c" 2
-
-
-TIM_HandleTypeDef timx_pwm_handle;
-TIM_BreakDeadTimeConfigTypeDef sBreakDeadTimeConfig;
-# 27 "../User/BSP/atim/atim.c"
-void ATIM_PWM_Init(uint16_t arr, uint16_t psc)
+void tim8_pwmin_init(void)
 {
-    GPIO_InitTypeDef GPIO_InitStructure;
-    TIM_OC_InitTypeDef TIM_OCInitStructure;
-    HAL_StatusTypeDef status;
+    GPIO_InitTypeDef gpio_init;
+    TIM_SlaveConfigTypeDef slave_config;
+    TIM_IC_InitTypeDef ic_config;
 
-    printf("[ATIM] 开始初始化互补PWM输出...\r\n");
+    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB2ENR) |= ((0x1UL << (1U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB2ENR) & ((0x1UL << (1U)))); (void)tmpreg; } while(0U);
+    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) |= ((0x1UL << (2U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) & ((0x1UL << (2U)))); (void)tmpreg; } while(0U);
 
+    gpio_init.Pin = ((uint16_t)0x0040);
+    gpio_init.Mode = (0x00000000U | 0x00000002U);
+    gpio_init.Pull = 0x00000002U;
+    gpio_init.Speed = 0x00000002U;
+    gpio_init.Alternate = ((uint8_t)0x03);
+    HAL_GPIO_Init(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x0800UL)), &gpio_init);
 
-    printf("[ATIM] 使能TIM1和GPIOE时钟...\r\n");
-    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB2ENR) |= ((0x1UL << (0U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB2ENR) & ((0x1UL << (0U)))); (void)tmpreg; } while(0U);
-    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) |= ((0x1UL << (4U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) & ((0x1UL << (4U)))); (void)tmpreg; } while(0U);
+    g_tim8_pwmin_handle.Instance = ((TIM_TypeDef *) ((0x40000000UL + 0x00010000UL) + 0x0400UL));
+    g_tim8_pwmin_handle.Init.Prescaler = 0;
+    g_tim8_pwmin_handle.Init.CounterMode = 0x00000000U;
+    g_tim8_pwmin_handle.Init.Period = 0xFFFF;
+    g_tim8_pwmin_handle.Init.ClockDivision = 0x00000000U;
+    HAL_TIM_IC_Init(&g_tim8_pwmin_handle);
 
+    slave_config.SlaveMode = (0x4UL << (0U));
+    slave_config.InputTrigger = ((0x1UL << (4U)) | (0x4UL << (4U)));
+    slave_config.TriggerPolarity = 0x00000000U;
+    slave_config.TriggerFilter = 0;
+    HAL_TIM_SlaveConfigSynchro(&g_tim8_pwmin_handle, &slave_config);
 
-    printf("[ATIM] 配置PE8(OCyN), PE9(OCy), PE15(BKIN)为复用推挽输出...\r\n");
-    GPIO_InitStructure.Pin = ((uint16_t)0x0100) | ((uint16_t)0x0200) | ((uint16_t)0x8000);
-    GPIO_InitStructure.Mode = (0x00000000U | 0x00000002U);
-    GPIO_InitStructure.Pull = 0x00000002U;
-    GPIO_InitStructure.Speed = 0x00000002U;
-    GPIO_InitStructure.Alternate = ((uint8_t)0x01);
-    HAL_GPIO_Init(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1000UL)), &GPIO_InitStructure);
+    ic_config.ICPolarity = 0x00000000U;
+    ic_config.ICSelection = (0x1UL << (0U));
+    ic_config.ICPrescaler = 0x00000000U;
+    ic_config.ICFilter = 0;
+    HAL_TIM_IC_ConfigChannel(&g_tim8_pwmin_handle, &ic_config, 0x00000000U);
 
+    ic_config.ICPolarity = (0x1UL << (1U));
+    ic_config.ICSelection = (0x2UL << (0U));
+    HAL_TIM_IC_ConfigChannel(&g_tim8_pwmin_handle, &ic_config, 0x00000004U);
 
-    printf("[ATIM] 配置定时器基础参数(ARR=%u, PSC=%u)...\r\n", arr, psc);
-    timx_pwm_handle.Instance = ((TIM_TypeDef *) ((0x40000000UL + 0x00010000UL) + 0x0000UL));
-    timx_pwm_handle.Init.Prescaler = psc;
-    timx_pwm_handle.Init.CounterMode = 0x00000000U;
-    timx_pwm_handle.Init.Period = arr;
-    timx_pwm_handle.Init.ClockDivision = (0x2UL << (8U));
-    timx_pwm_handle.Init.AutoReloadPreload = (0x1UL << (7U));
+    HAL_NVIC_SetPriority(TIM8_CC_IRQn, 1, 3);
+    HAL_NVIC_EnableIRQ(TIM8_CC_IRQn);
+    HAL_NVIC_SetPriority(TIM8_UP_TIM13_IRQn, 1, 3);
+    HAL_NVIC_EnableIRQ(TIM8_UP_TIM13_IRQn);
 
-
-    status = HAL_TIM_PWM_Init(&timx_pwm_handle);
-    if(status != HAL_OK) {
-        printf("[错误] 定时器初始化失败: %d\r\n", status);
-        return;
-    }
-
-
-    printf("[ATIM] 配置PWM通道1参数...\r\n");
-    TIM_OCInitStructure.OCMode = ((0x4UL << (4U)) | (0x2UL << (4U)));
-    TIM_OCInitStructure.Pulse = 0;
-    TIM_OCInitStructure.OCPolarity = 0x00000000U;
-    TIM_OCInitStructure.OCNPolarity = 0x00000000U;
-    TIM_OCInitStructure.OCIdleState = (0x1UL << (8U));
-    TIM_OCInitStructure.OCNIdleState = (0x1UL << (9U));
-
-
-    status = HAL_TIM_PWM_ConfigChannel(&timx_pwm_handle, &TIM_OCInitStructure, 0x00000000U);
-    if(status != HAL_OK) {
-        printf("[错误] PWM通道配置失败: %d\r\n", status);
-        return;
-    }
-
-
-    printf("[ATIM] 配置刹车和死区参数...\r\n");
-    sBreakDeadTimeConfig.OffStateRunMode = 0x00000000U;
-    sBreakDeadTimeConfig.OffStateIDLEMode = 0x00000000U;
-    sBreakDeadTimeConfig.LockLevel = 0x00000000U;
-    sBreakDeadTimeConfig.BreakState = (0x1UL << (12U));
-    sBreakDeadTimeConfig.BreakPolarity = (0x1UL << (13U));
-    sBreakDeadTimeConfig.AutomaticOutput = (0x1UL << (14U));
-    sBreakDeadTimeConfig.DeadTime = 0;
-
-
-    status = HAL_TIMEx_ConfigBreakDeadTime(&timx_pwm_handle, &sBreakDeadTimeConfig);
-    if(status != HAL_OK) {
-        printf("[错误] 刹车/死区配置失败: %d\r\n", status);
-        return;
-    }
-
-
-    printf("[ATIM] 启动PWM主输出和互补输出...\r\n");
-    HAL_TIM_PWM_Start(&timx_pwm_handle, 0x00000000U);
-    HAL_TIMEx_PWMN_Start(&timx_pwm_handle, 0x00000000U);
-
-    printf("[ATIM] PWM初始化成功!\r\n");
+    ((&g_tim8_pwmin_handle)->Instance->DIER |= ((0x1UL << (0U))));
+    HAL_TIM_IC_Start_IT(&g_tim8_pwmin_handle, 0x00000000U);
+    HAL_TIM_IC_Start_IT(&g_tim8_pwmin_handle, 0x00000004U);
 }
 
 
-
-
-
-
-
-static void calc_dead_time(uint8_t dtg)
+void restart_pwmin_capture(void)
 {
+    __disable_irq();
 
 
-
-
-
-    const float tDTS = 23.81f;
-    float dead_time = 0;
-
-
-    uint8_t mode = (dtg >> 5) & 0x07;
-
-
-    if(mode <= 3) {
-
-        dead_time = dtg * tDTS;
-        printf("[ATIM] 模式0xx: DT = DTG * tDTS\r\n");
-    }
-    else if(mode == 4 || mode == 5) {
-
-        uint8_t dtg_val = dtg & 0x7F;
-        dead_time = (64.0f + dtg_val) * 2.0f * tDTS;
-        printf("[ATIM] 模式10x: DT = (64 + DTG[6:0]) * 2 * tDTS\r\n");
-    }
-    else if(mode == 6) {
-
-        uint8_t dtg_val = dtg & 0x3F;
-        dead_time = (32.0f + dtg_val) * 8.0f * tDTS;
-        printf("[ATIM] 模式110: DT = (32 + DTG[5:0]) * 8 * tDTS\r\n");
-    }
-    else if(mode == 7) {
-
-        uint8_t dtg_val = dtg & 0x3F;
-        dead_time = (32.0f + dtg_val) * 16.0f * tDTS;
-        printf("[ATIM] 模式111: DT = (32 + DTG[5:0]) * 16 * tDTS\r\n");
-    }
-
-
-    printf("[ATIM] DTG=0x%02X (二进制: ", dtg);
-    for(int i = 7; i >= 0; i--) {
-        printf("%d", (dtg >> i) & 1);
-        if(i == 5) printf(" ");
-    }
-    printf(")\r\n");
-
-
-    printf("[ATIM] 计算死区时间 = %.2f ns (约 %.2f μs)\r\n",
-           dead_time, dead_time / 1000.0f);
+    PWMIN_STA = 0;
+    PWMIN_PSC = 0;
+    ((&g_tim8_pwmin_handle)->Instance->PSC = (0));
+    ((&g_tim8_pwmin_handle)->Instance->CNT = (0));
+    ((&g_tim8_pwmin_handle)->Instance->DIER |= ((0x1UL << (1U))|(0x1UL << (0U))));
+    ((&g_tim8_pwmin_handle)->Instance->CR1|=((0x1UL << (0U))));
+    ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+    __enable_irq();
 }
-# 170 "../User/BSP/atim/atim.c"
-void ATIM_PWM_SetDeadZone(uint16_t ccr, uint8_t dtg)
+
+
+static void tim8_pwmin_irq_handler(void)
 {
-    HAL_StatusTypeDef status;
-
-    printf("\r\n[ATIM] 设置死区时间 (CCR=%u, DTG=0x%02X)\r\n", ccr, dtg);
-
-
-    calc_dead_time(dtg);
-
-
-    sBreakDeadTimeConfig.DeadTime = dtg;
-    status = HAL_TIMEx_ConfigBreakDeadTime(&timx_pwm_handle, &sBreakDeadTimeConfig);
-    if(status != HAL_OK) {
-        printf("[错误] 死区时间更新失败: %d\r\n", status);
+    static uint8_t sflag = 0;
+    if(PWMIN_STA)
+    {
+        PWMIN_PSC = 0;
+        ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+        ((&g_tim8_pwmin_handle)->Instance->CNT = (0));
         return;
     }
+    if((((&g_tim8_pwmin_handle)->Instance->SR &((0x1UL << (0U)))) == ((0x1UL << (0U)))))
+    {
+        ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (0U))));
+        if((((&g_tim8_pwmin_handle)->Instance->SR &((0x1UL << (1U)))) == ((0x1UL << (1U)))) == 0)
+        {
+            sflag = 0;
+            if(PWMIN_PSC == 0)
+            {
+                PWMIN_PSC++;
+            }
+            else
+            {
+                if(PWMIN_PSC == 65535)
+                {
+                    PWMIN_PSC = 0;
+                }
+                else if(PWMIN_PSC > 32767)
+                {
+                    PWMIN_PSC = 65535;
+                }
+                else
+                {
+                    PWMIN_PSC += PWMIN_PSC;
+                }
+            }
+            ((&g_tim8_pwmin_handle)->Instance->PSC = (PWMIN_PSC));
+            ((&g_tim8_pwmin_handle)->Instance->CNT = (0));
+            ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+            return;
+        }
+    }
+    if(sflag == 0)
+    {
+        if((((&g_tim8_pwmin_handle)->Instance->SR &((0x1UL << (1U)))) == ((0x1UL << (1U)))))
+        {
+            sflag = 1;
+        }
+        ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+        return;
+    }
+    if(PWMIN_STA == 0)
+    {
+        if((((&g_tim8_pwmin_handle)->Instance->SR &((0x1UL << (1U)))) == ((0x1UL << (1U)))))
+        {
+            PWMIN_Highvlaue = HAL_TIM_ReadCapturedValue(&g_tim8_pwmin_handle, 0x00000004U)+1;
+            PWMIN_CycleTime = HAL_TIM_ReadCapturedValue(&g_tim8_pwmin_handle, 0x00000000U)+1;
+            if(PWMIN_Highvlaue < PWMIN_CycleTime)
+            {
+                PWMIN_STA = 1;
+                PWMIN_PSC = ((TIM_TypeDef *) ((0x40000000UL + 0x00010000UL) + 0x0400UL))->PSC;
+                if(PWMIN_PSC == 0)
+                {
+                    PWMIN_Highvlaue++;
+                    PWMIN_CycleTime++;
+                }
+                sflag = 0;
+
+                ((TIM_TypeDef *) ((0x40000000UL + 0x00010000UL) + 0x0400UL))->CR1 &= ~(1<<0);
+                ((&g_tim8_pwmin_handle)->Instance->DIER &= ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+                ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+            }
+            else
+            {
+                restart_pwmin_capture();
+            }
+        }
+    }
+    ((&g_tim8_pwmin_handle)->Instance->SR = ~((0x1UL << (1U))|(0x1UL << (2U))|(0x1UL << (0U))));
+}
+
+void TIM8_CC_IRQHandler(void)
+{
+    tim8_pwmin_irq_handler();
+}
+
+void TIM8_UP_TIM13_IRQHandler(void)
+{
+    tim8_pwmin_irq_handler();
+}
 
 
-    ((TIM_TypeDef *) ((0x40000000UL + 0x00010000UL) + 0x0000UL))->CCR1 = ccr;
+TIM_HandleTypeDef g_tim14_pwmout_handle;
+
+void tim14_pwmout_init(uint16_t arr, uint16_t psc)
+{
+    GPIO_InitTypeDef GPIO_InitStruct;
+    TIM_OC_InitTypeDef oc_init;
 
 
-    ((&timx_pwm_handle)->Instance->BDTR|=((0x1UL << (15U))));
+    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB1ENR) |= ((0x1UL << (8U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->APB1ENR) & ((0x1UL << (8U)))); (void)tmpreg; } while(0U);
+    do { volatile uint32_t tmpreg = 0x00U; ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) |= ((0x1UL << (5U)))); tmpreg = ((((RCC_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x3800UL))->AHB1ENR) & ((0x1UL << (5U)))); (void)tmpreg; } while(0U);
 
-    printf("[ATIM] 死区时间设置成功\r\n");
+
+    GPIO_InitStruct.Pin = ((uint16_t)0x0200);
+    GPIO_InitStruct.Mode = (0x00000000U | 0x00000002U);
+    GPIO_InitStruct.Pull = 0x00000001U;
+    GPIO_InitStruct.Speed = 0x00000002U;
+    GPIO_InitStruct.Alternate = ((uint8_t)0x09);
+    HAL_GPIO_Init(((GPIO_TypeDef *) ((0x40000000UL + 0x00020000UL) + 0x1400UL)), &GPIO_InitStruct);
+
+
+    g_tim14_pwmout_handle.Instance = ((TIM_TypeDef *) (0x40000000UL + 0x2000UL));
+    g_tim14_pwmout_handle.Init.Prescaler = psc;
+    g_tim14_pwmout_handle.Init.CounterMode = 0x00000000U;
+    g_tim14_pwmout_handle.Init.Period = arr;
+    g_tim14_pwmout_handle.Init.ClockDivision = 0x00000000U;
+    HAL_TIM_PWM_Init(&g_tim14_pwmout_handle);
+
+
+    oc_init.OCMode = ((0x4UL << (4U)) | (0x2UL << (4U)));
+    oc_init.Pulse = arr / 2;
+    oc_init.OCPolarity = 0x00000000U;
+    oc_init.OCFastMode = 0x00000000U;
+    HAL_TIM_PWM_ConfigChannel(&g_tim14_pwmout_handle, &oc_init, 0x00000000U);
+
+
+    HAL_TIM_PWM_Start(&g_tim14_pwmout_handle, 0x00000000U);
 }
