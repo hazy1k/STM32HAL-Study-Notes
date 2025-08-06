@@ -1,5 +1,3 @@
-# USMART-调试组件
+# RTC-实时时钟
 
-![屏幕截图 2025-07-31 161830.png](https://raw.githubusercontent.com/hazy1k/My-drawing-bed/main/2025/07/31-16-19-04-屏幕截图%202025-07-31%20161830.png)
-
-![屏幕截图 2025-07-31 161849.png](https://raw.githubusercontent.com/hazy1k/My-drawing-bed/main/2025/07/31-16-19-09-屏幕截图%202025-07-31%20161849.png)
+![屏幕截图 2025-08-05 103705.png](https://raw.githubusercontent.com/hazy1k/My-drawing-bed/main/2025/08/05-10-37-23-屏幕截图%202025-08-05%20103705.png)
