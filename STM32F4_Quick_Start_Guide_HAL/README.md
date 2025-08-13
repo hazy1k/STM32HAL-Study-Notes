@@ -46,7 +46,7 @@
 
 - [x] 内部FLASH模拟EEPROM
 
-- [ ] 外扩SRAM测试
+- [x] 外扩SRAM测试
 
 - [ ] 内存管理
 
